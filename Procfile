@@ -1,0 +1,1 @@
+web: gunicorn django_home_task.wsgi
