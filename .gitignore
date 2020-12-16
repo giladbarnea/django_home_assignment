@@ -133,3 +133,4 @@ dmypy.json
 .vscode
 .gitignore.backup
 scripts/completions.sh
+staticfiles
