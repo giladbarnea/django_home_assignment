@@ -134,3 +134,4 @@ dmypy.json
 .gitignore.backup
 scripts/completions.sh
 staticfiles
+*.pdf
