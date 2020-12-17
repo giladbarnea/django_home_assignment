@@ -1,3 +1,4 @@
+print(__file__)
 """
 Django settings for django_home_task project.
 
@@ -114,4 +115,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# CSRF_COOKIE_SAMESITE = 'None'
 django_heroku.settings(locals())

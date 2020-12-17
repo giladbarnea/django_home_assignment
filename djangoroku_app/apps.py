@@ -1,3 +1,4 @@
+print(__file__)
 from django.apps import AppConfig
 
 

@@ -1,3 +1,4 @@
+print(__file__)
 """
 ASGI config for django_home_task project.
 

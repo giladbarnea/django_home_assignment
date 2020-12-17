@@ -132,6 +132,8 @@ dmypy.json
 *.code-workspace
 .vscode
 .gitignore.backup
-scripts/completions.sh
+
 staticfiles
 *.pdf
+*.zip
+foo.py
