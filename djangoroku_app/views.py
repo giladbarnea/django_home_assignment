@@ -25,6 +25,10 @@ def write(request, *args, **kwargs):
     if request.method == 'POST':
         data = json.loads(request.body.decode())
         log.info(f'{data = }')
+        from . import models
+        msg = models.Message(**data)
+        msg.save()
+        log.info("saved Message to db: ", msg)
     
     return HttpResponse(b"Hello from write")
 

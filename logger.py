@@ -43,7 +43,9 @@ def init():
             format='%(relpath)s.%(funcName)s():%(lineno)d | %(message)s',
             datefmt="[%X]",
             handlers=[RichHandler(rich_tracebacks=True,
-                                  tracebacks_show_locals=True)]
+                                  tracebacks_show_locals=True,
+                                  locals_max_length=100,
+                                  locals_max_string=160)]
             )
     logging.setLoggerClass(Logger)
     log = getlogger()
