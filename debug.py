@@ -2,6 +2,8 @@ print(__file__)
 import sys
 from rich.console import Console
 from functools import partial
+from rich import inspect
+import os
 
 
 def patch_breakpointhook():
@@ -12,7 +14,7 @@ def patch_breakpointhook():
     def set_trace():
         import builtins
         import rich
-        whatis = partial(rich.inspect, methods=True, help=True)
+        whatis = partial(inspect, methods=True, help=True)
         from IPython import get_ipython
         ipy = get_ipython()
         nonlocal pi
@@ -21,6 +23,8 @@ def patch_breakpointhook():
         con = Console()
         if sys.exc_info()[0]:  # If any exception occurred:
             con.print_exception(show_locals=True)
+        mm = lambda topic: os.system(f'bash -c "/usr/bin/python3.8 -m mytool.myman {topic}"')
+        builtins.mm = mm
         builtins.rich = rich
         builtins.whatis = whatis
         builtins.ipy = ipy
@@ -28,9 +32,9 @@ def patch_breakpointhook():
         builtins.pp = pp
         builtins.con = con
         try:
-            pi.ok('available debug tools:', f'rich, whatis, ipy, pi, pp, con')
+            pi.ok('available debug tools:', f'rich, whatis, ipy, pi, pp, con, mm')
         except Exception as e:
-            pp(dict(rich=rich, whatis=whatis, ipy=ipy, pi=pi, pp=pp, con=con))
+            pp(dict(rich=rich, whatis=whatis, ipy=ipy, pi=pi, pp=pp, con=con, mm=mm))
         _set_trace()
     
     try:
@@ -47,3 +51,7 @@ def patch_breakpointhook():
         from pdb import set_trace as _set_trace  # vanilla python pdb
     
     sys.breakpointhook = set_trace
+
+
+def printattr(obj, attr: str, default=None):
+    inspect(getattr(obj, attr, default), docs=False, title=f'{obj}.{attr}')

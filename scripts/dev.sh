@@ -12,7 +12,7 @@ vex() {
 }
 alias mm='/usr/bin/python3.8 -m mytool.myman'
 alias gig='/usr/bin/python3.8 -m igit.exec.ignore'
-alias tree='tree -Ia "*env|__pycache__|.git|.idea|.vscode|staticfiles|.ipynb_checkpoints|__pycache__"'
+alias tree='tree -Ia "*env|.git|.idea|.vscode|staticfiles|.ipynb_checkpoints|__pycache__"'
 alias pmp='python manage.py'
 function _is_in_virenv() {
   local virenv_py_version
