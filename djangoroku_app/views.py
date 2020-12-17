@@ -1,12 +1,12 @@
 print(__file__)
 import json
 
-from django.shortcuts import HttpResponse
-from rich.pretty import pprint
-from rich.console import Console
 import rich
-import logger
+from django.shortcuts import HttpResponse
+from rich.console import Console
+
 import debug
+import logger
 
 # pretty.install()
 
@@ -21,17 +21,10 @@ def index(request, *args, **kwargs):
 
 
 def write(request, *args, **kwargs):
-    console.log(f'write({request}, args: {args}, kwargs: {kwargs})')
-    
-    debug.printattr(request, request.method)
-    debug.printattr(request, 'session')
-    debug.printattr(request, 'user')
-    
+    log.debug(f'write({request = }, {args = }, {kwargs = })')
     if request.method == 'POST':
-        decoded = request.readline().decode()
-        if decoded:
-            data = json.loads(decoded)
-            pprint(data)
+        data = json.loads(request.body.decode())
+        log.info(f'{data = }')
     
     return HttpResponse(b"Hello from write")
 

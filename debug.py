@@ -1,9 +1,9 @@
 print(__file__)
-import sys
-from rich.console import Console
-from functools import partial
-from rich import inspect
 import os
+import sys
+
+from rich import inspect
+from rich.console import Console
 
 
 def patch_breakpointhook():
@@ -14,7 +14,7 @@ def patch_breakpointhook():
     def set_trace():
         import builtins
         import rich
-        whatis = partial(inspect, methods=True, help=True)
+        whatis = lambda *args, **kwargs: inspect(*args, **kwargs, methods=True, help=True)
         from IPython import get_ipython
         ipy = get_ipython()
         nonlocal pi
@@ -54,4 +54,8 @@ def patch_breakpointhook():
 
 
 def printattr(obj, attr: str, default=None):
-    inspect(getattr(obj, attr, default), docs=False, title=f'{obj}.{attr}')
+    try:
+        import pyinspect as pi
+        pi.what(getattr(obj, attr, default), title=f'{obj}.{attr}')
+    except ModuleNotFoundError:
+        inspect(getattr(obj, attr, default), docs=False, title=f'{obj}.{attr}')

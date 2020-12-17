@@ -39,6 +39,12 @@ function deploy() {
   fi
   vex heroku run python manage.py migrate
 }
+function silentkill() {
+  if [[ -n "$(pgrep -f "$1")" ]]; then
+    echo "found proc(s) for '$1'. killing..."
+    kill -9 "$(pgrep -f "$1")" 2>/dev/null
+  fi
+}
 # runlocal <django|heroku>
 function runlocal() {
   _is_in_virenv || return 1
@@ -48,25 +54,27 @@ function runlocal() {
   fi
   local platform="$1"
   if [[ "$platform" == "heroku" ]]; then
-    if [[ -n "$(pgrep -f '.*heroku-cli.*start')" ]]; then
-      kill -9 "$(pgrep -f '.*heroku-cli.*start')" 2>/dev/null
-    fi
+    silentkill '.*heroku-cli.*start'
   elif [[ "$platform" == "django" ]]; then
-    if [[ -n "$(pgrep -f '.*env.*manage\.py runserver')" ]]; then
-      kill -9 "$(pgrep -f '.*env.*manage\.py runserver')" 2>/dev/null
-    fi
+    silentkill '.*env.*manage\.py runserver'
   fi
-  if [[ -n "$(pgrep -f '.*django_home_task')" ]]; then
-    kill -9 "$(pgrep -f '.*django_home_task')" 2>/dev/null
-  fi
+  silentkill '.*django_home_task'
 
   vex python manage.py migrate || return 1
-  python manage.py collectstatic
+  local should_collect_static=true
+  for i in {1..5}; do
+    if [[ "${*[$i]}" = "--nostatic" ]]; then
+      should_collect_static=false
+      break
+    fi
+  done
+  [ $should_collect_static = true ] && vex python manage.py collectstatic
+
   if [[ "$platform" == "heroku" ]]; then
-    vex heroku local
+    vex heroku local "${@:2}"
     return $?
   elif [[ "$platform" == "django" ]]; then
-    vex python manage.py runserver
+    vex python manage.py runserver "${@:2}"
     return $?
   fi
 }

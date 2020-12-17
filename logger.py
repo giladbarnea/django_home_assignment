@@ -47,4 +47,4 @@ def init():
             )
     logging.setLoggerClass(Logger)
     log = getlogger()
-    log.debug('logger initiated and now exists globally across app')
+    log.debug('logger initiated')
