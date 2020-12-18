@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_HOME_TASK_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -81,7 +81,8 @@ DATABASES = {
         'NAME':   'django_home_task',
         'USER':   'gilad',
         'HOST':   'localhost',
-        'PASSWORD': os.environ['DJANGO_HOME_TASK_DB_PASS']
+        'PASSWORD': os.environ['DJANGO_HOME_TASK_DB_PASS'],
+        'PORT': '5432'
         }
     }
 
