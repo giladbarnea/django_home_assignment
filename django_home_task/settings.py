@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'django_home_task.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':   BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME':   BASE_DIR / 'db.sqlite3',
+        'NAME':   'django_home_task',
+        'USER':   'gilad',
+        'HOST':   'localhost',
+        'PASSWORD': os.environ['DJANGO_HOME_TASK_DB_PASS']
         }
     }
 

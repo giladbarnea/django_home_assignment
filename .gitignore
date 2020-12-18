@@ -3,6 +3,7 @@
 *.pdf
 *.sqlite*
 *.zip
+*/migrations/[0-9]*.py
 *awesome*.md
 *env*/
 .env

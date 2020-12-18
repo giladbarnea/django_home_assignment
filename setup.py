@@ -15,11 +15,20 @@ setup_args = dict(name='django_home_assignment',
                   url='https://github.com/giladbarnea/https://github.com/giladbarnea/django_home_assignment.git',
                   packages=packages,
                   keywords=[],
-                  install_requires=[],
+                  install_requires=[
+                      "Django==3.1.4",
+                      "django-heroku==0.3.1",
+                      "gunicorn==20.0.4",
+                      "psycopg2-binary==2.8.6",
+                      "psycopg2==2.8.6",
+                      "rich",
+                      ],
                   # pip install -e .[dev]
                   extras_require={
                       'dev': ['pytest',
-                              'ipdb',
+                              # 'ipdb',
+                              # https://stackoverflow.com/a/54794506/11842164
+                              'ipdb @ git+ssh://git@github.com/giladbarnea/ipdb@v0.13.4#egg=ipdb'
                               'IPython',
                               'semver',
                               'birdseye',

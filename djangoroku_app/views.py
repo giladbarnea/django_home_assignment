@@ -1,11 +1,10 @@
 print(__file__)
 import json
 
-import rich
 from django.shortcuts import HttpResponse
 from rich.console import Console
 
-import debug
+# import debug
 import logger
 
 # pretty.install()
@@ -28,7 +27,7 @@ def write(request, *args, **kwargs):
         from . import models
         msg = models.Message(**data)
         msg.save()
-        log.info("saved Message to db: ", msg)
+        log.info(f"saved Message to db: {msg}")
     
     return HttpResponse(b"Hello from write")
 

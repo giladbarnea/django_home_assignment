@@ -15,17 +15,15 @@ Including another URLconf
 """
 
 print(__file__)
-
 from django.contrib import admin
 from django.urls import path, include
 import logger
 import sys
 import ipdb
-import debug
+
 
 logger.init()
 sys.breakpointhook = ipdb.set_trace
-# debug.patch_breakpointhook()
 urlpatterns = [
     path(r'', include('djangoroku_app.urls')),
     path('admin/', admin.site.urls),
