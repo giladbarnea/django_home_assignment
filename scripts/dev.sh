@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+export DJANGO_SETTINGS_MODULE=django_home_task.settings
+
 vex() {
   local description="\x1b[37;48;2;10;10;10m$*\x1b[0m"
   echo "\nrunning $description...\n" >&2
@@ -60,6 +63,7 @@ function runlocal() {
   fi
   silentkill '.*django_home_task'
 
+  vex python manage.py makemigrations || return 1
   vex python manage.py migrate || return 1
   local should_collect_static=true
   for i in {1..5}; do

@@ -76,13 +76,14 @@ WSGI_APPLICATION = 'django_home_task.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE':   'django.db.backends.postgresql',
         # 'NAME':   BASE_DIR / 'db.sqlite3',
-        'NAME':   'django_home_task',
-        'USER':   'gilad',
-        'HOST':   'localhost',
+        # sudo -u postgres createdb django_home_task
+        'NAME':     'django_home_task',
+        'USER':     'gilad',
+        'HOST':     'localhost',
         'PASSWORD': os.environ['DJANGO_HOME_TASK_DB_PASS'],
-        'PORT': '5432'
+        'PORT':     '5432'
         }
     }
 

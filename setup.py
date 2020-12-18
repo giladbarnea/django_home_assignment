@@ -33,7 +33,10 @@ setup_args = dict(name='django_home_assignment',
                               'semver',
                               'birdseye',
                               'pyinspect',
-                              'requests'
+                              'requests',
+                              'pgcli',
+                              'ipython-sql',
+                              'jupyter'
                               ]
                       },
                   # classifiers=[

@@ -6,6 +6,7 @@ import rich
 from rich import inspect
 import os
 from rich.pretty import pprint
+
 ppr = pprint
 import pyinspect as pi
 
@@ -27,7 +28,9 @@ def what(*args, **kwargs):
 builtins.rich = rich
 builtins.mm = mm
 builtins.what = what
+builtins.inspect = inspect
 # builtins.ipy = ipy
 builtins.pi = pi
 builtins.ppr = ppr
 builtins.con = con
+pi.ok('available debug tools:', f'rich, inspect, what (inspect with methods), pi, ppr, con, mm')
