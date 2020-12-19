@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -116,11 +116,18 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# CSRF_COOKIE_SAMESITE = 'None'
+
+#########################
+#### CUSTOM SETTINGS ####
+#########################
+# Controls whether sys.breakpointhook is set to ipdb.set_trace or left as-is (in django_home_task/urls.py)
+# manage.py --no-ipdb to set to False
+IPDB = True
+import django_heroku
 django_heroku.settings(locals())

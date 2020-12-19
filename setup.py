@@ -30,12 +30,13 @@ setup_args = dict(name='django_home_assignment',
                               # https://stackoverflow.com/a/54794506/11842164
                               'ipdb @ git+ssh://git@github.com/giladbarnea/ipdb@v0.13.4#egg=ipdb'
                               'IPython',
+                              'ipython-sql',
+                              'ipython_autoimport',
                               'semver',
                               'birdseye',
-                              'pyinspect',
+                              'ipdb @ git+ssh://git@github.com/giladbarnea/pyinspect@v0.13.4#egg=pyinspect'
                               'requests',
                               'pgcli',
-                              'ipython-sql',
                               'jupyter'
                               ]
                       },

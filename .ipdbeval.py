@@ -1,19 +1,19 @@
 """This file is evalulated just before ipdb.set_trace() is called (ipdb fork)"""
-print('in .ipdbeval.py, building fancy trace...')
+print('in .ipdbeval.py')
 import builtins
 import sys
 import rich
 from rich import inspect
 import os
-from rich.pretty import pprint
+from rich.pretty import pprint as ppr
 
-ppr = pprint
 import pyinspect as pi
 
 from rich.console import Console
 
 con = Console()
 if sys.exc_info()[0]:
+    print('.ipdbeval.py: building fancy trace...')
     con.print_exception(show_locals=True)
 
 
@@ -23,6 +23,14 @@ def mm(topic):
 
 def what(*args, **kwargs):
     inspect(*args, **kwargs, methods=True, help=True)
+
+
+def what_(*args, **kwargs):
+    inspect(*args, **kwargs, methods=True, help=True, private=True)
+
+
+def what__(*args, **kwargs):
+    inspect(*args, **kwargs, methods=True, help=True, private=True, dunder=True)
 
 
 builtins.rich = rich

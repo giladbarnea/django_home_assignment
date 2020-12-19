@@ -1,8 +1,19 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
-
+print(__file__)
 import os
 import sys
+
+#### Parse custom command line args ####
+# This needs to run before main() so execute_from_command_line() doesn't raise an 'Unknown command'
+for arg in sys.argv:
+    if arg == '--no-ipdb':
+        from django_home_task import settings
+        
+        # Controls whether sys.breakpointhook is set to ipdb.set_trace or left as-is (in django_home_task/urls.py)
+        settings.IPDB = False
+        sys.argv.remove(arg)
+print('sys.argv: ', *sys.argv)
 
 
 def main():
