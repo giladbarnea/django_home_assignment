@@ -27,8 +27,8 @@ class Logger(logging.Logger):
     def __init__(self, name: str, level=logging.NOTSET):
         super().__init__(name, level)
     
-    def logattr(self, obj, name: str, default=None):
-        inspect(getattr(obj, name, default), docs=False, title=f'{obj}.{name}')
+    # def logattr(self, obj, name: str, default=None):
+    #     inspect(getattr(obj, name, default), docs=False, title=f'{obj}.{name}')
 
 
 def getlogger(name: str = "main") -> Logger:

@@ -33,6 +33,7 @@ def what__(*args, **kwargs):
     inspect(*args, **kwargs, methods=True, help=True, private=True, dunder=True)
 
 
+builtins.sys = sys
 builtins.rich = rich
 builtins.mm = mm
 builtins.what = what

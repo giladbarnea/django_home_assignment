@@ -40,10 +40,20 @@ function deploy() {
   fi
   vex heroku run python manage.py migrate
 }
-function silentkill() {
+function killproc() {
+  local all_killed=true
   if [[ -n "$(pgrep -f "$1")" ]]; then
-    echo "found proc(s) for '$1'. killing..."
-    kill -9 "$(pgrep -f "$1")" 2>/dev/null
+    echo "\x1b[1;33mfound proc(s) matching '$1'. killing...\x1b[0m"
+    for proc in $(pgrep -f "$1"); do
+      kill -9 "$proc" || all_killed=false
+    done
+  fi
+  if [[ "$all_killed" = true ]]; then
+    echo "\x1b[32mall '$1' processes killed\x1b[0m"
+    return 0
+  else
+    echo "\x1b[33mfailed killing all '$1' processes\x1b[0m"
+    return 1
   fi
 }
 # runlocal <django|heroku>
@@ -55,11 +65,11 @@ function runlocal() {
   fi
   local platform="$1"
   if [[ "$platform" == "heroku" ]]; then
-    silentkill '.*heroku-cli.*start'
+    killproc '.*heroku\-cli.*start'
   elif [[ "$platform" == "django" ]]; then
-    silentkill '.*env.*manage\.py runserver'
+    killproc '.*manage\.py runserver'
   fi
-  silentkill '.*django_home_task'
+#  killproc '.*django_home_task'
 
   vex python manage.py makemigrations || return 1
   vex python manage.py migrate || return 1
@@ -70,7 +80,7 @@ function runlocal() {
       break
     fi
   done
-  [ $should_collect_static = true ] && vex python manage.py collectstatic
+  [[ $should_collect_static = true ]] && vex python manage.py collectstatic
 
   if [[ "$platform" == "heroku" ]]; then
     vex heroku local "${@:2}"
@@ -80,5 +90,4 @@ function runlocal() {
     return $?
   fi
 }
-#[ -s ./scripts/dev.sh ] && cat ./scripts/dev.sh | python3 -c 'x if x.startswith("alias") else None'
-[ -s ./scripts/dev.sh ] && cat ./scripts/dev.sh | python3 -c 'import sys; [print(x, end="") if x.startswith("alias") else None for x in sys.stdin.readlines()]'
+[[ -s ./scripts/dev.sh ]] && cat ./scripts/dev.sh | python3 -c 'import sys; [print(x, end="") if x.startswith("alias") else None for x in sys.stdin.readlines()]'

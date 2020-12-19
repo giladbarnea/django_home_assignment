@@ -1,33 +1,44 @@
 print(__file__)
 from django.db import models
 from logger import getlogger
-from time import time as unixtime
+import sys
 
 log = getlogger()
 
 
-# {attr:getattr(self, attr) for attr in [f.attname for f in self._meta.concrete_fields]}
 class Message(models.Model):
     sender = models.CharField("The sender's username", max_length=100, null=False, unique=False)
     receiver = models.CharField("The receiver's username", max_length=100, null=False, unique=False)
     message = models.TextField(max_length=256, null=False, unique=False)
     subject = models.CharField(max_length=100, unique=False)
-    created: int
+    created = models.DateTimeField(auto_now_add=True)
+    REQUIRED_FIELDS = ['sender', 'receiver', 'message', 'subject']  # todo: create dynamically
     
     def __init__(self, *args, **kwargs):
-        epoch = int(unixtime())
         log.debug(f'{self.__class__.__qualname__}({args = }, {kwargs = })')
+        missing_fields = []
+        for field in self.REQUIRED_FIELDS:
+            if field not in kwargs:
+                missing_fields.append(field)
+        if missing_fields:
+            raise KeyError(f"{self.clsname}() requires the following fields: {', '.join(map(repr, self.REQUIRED_FIELDS))}. "
+                           f"The following fields were not provided: {', '.join(map(repr, missing_fields))}")
+        # only if all required fields are provided
         super().__init__(*args, **kwargs)
-        self.sender = kwargs.get('sender')
-        self.receiver = kwargs.get('receiver')
-        self.message = kwargs.get('message')
-        self.subject = kwargs.get('subject')
-        self.created = epoch
+        self.sender = kwargs['sender']
+        self.receiver = kwargs['receiver']
+        self.message = kwargs['message']
+        self.subject = kwargs['subject']
+    
+    @property
+    def clsname(self):
+        return self.__class__.__qualname__
     
     def __str__(self):
+        """Pretty string displaying the instance's field names and values conveniently"""
         attrs = []
         for attname in [f.attname for f in self._meta.concrete_fields]:
             attval = repr(getattr(self, attname))
             attrs.append(f"{attname}: {attval}")
         attrs_str = "\n\t" + "\n\t".join(attrs)
-        return f"{self.__class__.__qualname__}({self.id}){attrs_str}"
+        return f"{self.clsname}({self.id}){attrs_str}"
