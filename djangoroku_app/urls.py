@@ -8,5 +8,6 @@ app_name = 'djangoroku_app'
 urlpatterns = [
     path(r'', views.index, name='index'),
     path(r'write/', views.write, name='write'),
+    path(r'read/', views.read, name='read'),
     path(r'dbg/', views.dbg, name='dbg'),
     ]

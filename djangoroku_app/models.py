@@ -1,7 +1,6 @@
 print(__file__)
 from django.db import models
 from logger import getlogger
-import sys
 
 log = getlogger()
 
@@ -16,6 +15,8 @@ class Message(models.Model):
     
     def __init__(self, *args, **kwargs):
         log.debug(f'{self.__class__.__qualname__}({args = }, {kwargs = })')
+        
+        # todo: refactor out field validation to separate function
         missing_fields = []
         for field in self.REQUIRED_FIELDS:
             if field not in kwargs:
@@ -23,7 +24,8 @@ class Message(models.Model):
         if missing_fields:
             raise KeyError(f"{self.clsname}() requires the following fields: {', '.join(map(repr, self.REQUIRED_FIELDS))}. "
                            f"The following fields were not provided: {', '.join(map(repr, missing_fields))}")
-        # only if all required fields are provided
+        
+        # Construct only if all required fields are provided
         super().__init__(*args, **kwargs)
         self.sender = kwargs['sender']
         self.receiver = kwargs['receiver']

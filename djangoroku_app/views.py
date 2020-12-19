@@ -4,10 +4,8 @@ import json
 from django.shortcuts import HttpResponse
 from rich.console import Console
 
-# import debug
 import logger
-
-# pretty.install()
+from . import models
 
 console = Console()
 log = logger.getlogger()
@@ -21,15 +19,21 @@ def index(request, *args, **kwargs):
 
 def write(request, *args, **kwargs):
     log.debug(f'write({request = }, {args = }, {kwargs = })')
-    if request.method == 'POST':
-        data = json.loads(request.body.decode())
-        log.info(f'{data = }')
-        from . import models
-        msg = models.Message(**data)
-        msg.save()
-        log.info(f"saved Message to db: {msg}")
+    data = json.loads(request.body.decode())
+    log.info(f'{data = }')
+    
+    msg = models.Message(**data)
+    msg.save()
+    log.info(f"saved Message to db: {msg}")
     
     return HttpResponse(b"Hello from write")
+
+
+def read(request, *args, **kwargs):
+    log.debug(f'read({request = }, {args = }, {kwargs = })')
+    data = json.loads(request.body.decode())
+    log.info(f'{data = }')
+    return HttpResponse(b"Hello from read")
 
 
 def dbg(request, *args, **kwargs):
