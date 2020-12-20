@@ -1,14 +1,13 @@
-from django.http import QueryDict
+from django.contrib import messages
 
-print(__file__)
+print('\n', __file__)
 import json
 
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, redirect
 from rich.console import Console
 
 import logger
 from djangoroku_app import models
-from rich.pretty import pprint
 
 console = Console()
 log = logger.getlogger()
@@ -34,11 +33,27 @@ def write(request, *args, **kwargs):
     return HttpResponse(response.encode(errors='replace'))
 
 
+def _bad_read(request):
+    error = "\n".join((f"'/read' endpoint must be of either the following forms:",
+                       f"/read/user/USERNAME[/filter or multifilter]",
+                       f"/read/msg/MSG_ID[/filter or multifilter]",
+                       f"Instead, you tried to access '{request.path}'",
+                       "Redirecting..."))
+    messages.error(request, error)
+    log.error(error)
+    return redirect('/')
+
+
 def read(request, *args, **kwargs):
     log.debug(f'read({request = }, {args = }, {kwargs = })')
-    # from rich.pretty import print
-    qdict: QueryDict = request.GET
-    pprint(qdict, console=console)
+    if not kwargs:
+        return _bad_read(request)
+    if 'username' in kwargs:
+        username = kwargs['username']
+    elif 'msg_id' in kwargs:
+        msg_id = kwargs['msg_id']
+    else:
+        return _bad_read(request)
     return HttpResponse(b"Hello from read")
 
 
