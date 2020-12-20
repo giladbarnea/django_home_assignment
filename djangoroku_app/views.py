@@ -1,3 +1,5 @@
+from django.http import QueryDict
+
 print(__file__)
 import json
 
@@ -6,6 +8,7 @@ from rich.console import Console
 
 import logger
 from djangoroku_app import models
+from rich.pretty import pprint
 
 console = Console()
 log = logger.getlogger()
@@ -33,8 +36,9 @@ def write(request, *args, **kwargs):
 
 def read(request, *args, **kwargs):
     log.debug(f'read({request = }, {args = }, {kwargs = })')
-    data = json.loads(request.body.decode())
-    log.info(f'{data = }')
+    # from rich.pretty import print
+    qdict: QueryDict = request.GET
+    pprint(qdict, console=console)
     return HttpResponse(b"Hello from read")
 
 

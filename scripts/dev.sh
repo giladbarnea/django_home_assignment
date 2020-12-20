@@ -37,12 +37,11 @@ function _is_in_virenv() {
     return 1
   fi
 }
-function pmp(){
+function pmp() {
   _is_in_virenv || return 1
   python manage.py "$@"
   return $?
 }
-
 
 function deploy() {
   _is_in_virenv || return 1
@@ -82,27 +81,54 @@ function killproc() {
 # runlocal <django|heroku>
 function runlocal() {
   _is_in_virenv || return 1
-  if [[ -z "$1" ]]; then
-    echo "FATAL: runlocal expects 1 param: 'django' or 'heroku'"
-    return 1
-  fi
-  local platform="$1"
-  if [[ "$platform" == "heroku" ]]; then
-    killproc '.*heroku\-cli.*start' || return 1
-  elif [[ "$platform" == "django" ]]; then
-    killproc '.*manage\.py runserver' || return 1
-  fi
 
+  #  local platform="$1"
+  #  if [[ "$platform" == "heroku" ]]; then
+  #    killproc '.*heroku\-cli.*start' || return 1
+  #  elif [[ "$platform" == "django" ]]; then
+  #    killproc '.*manage\.py runserver' || return 1
+  #  fi
+
+  local platform
   local should_collect_static=true
   local should_migrate=true
-  for i in {1..10}; do
-    if [[ "${*[$i]}" == "--nostatic" ]]; then
+  local POSITIONAL=()
+  while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+    heroku)
+      killproc '.*heroku\-cli.*start' || return 1
+      platform=heroku
+      shift
+      ;;
+    django)
+      killproc '.*manage\.py runserver' || return 1
+      platform=django
+      shift
+      ;;
+    --nostatic)
       should_collect_static=false
-    fi
-    if [[ "${*[$i]}" == "--no-migrate" ]]; then
+      POSITIONAL+=("$1")
+      shift
+      ;;
+    --no-migrate)
       should_migrate=false
-    fi
+      shift
+      ;;
+    *)
+      POSITIONAL+=("$1")
+      shift
+      ;;
+
+    esac
   done
+  #  for i in {1..10}; do
+  #    if [[ "${*[$i]}" == "--nostatic" ]]; then
+  #      should_collect_static=false
+  #    fi
+  #    if [[ "${*[$i]}" == "--no-migrate" ]]; then
+  #      should_migrate=false
+  #    fi
+  #  done
   if [[ "$should_migrate" == true ]]; then
     vex python manage.py makemigrations || return 1
     vex python manage.py migrate || return 1
@@ -110,11 +136,13 @@ function runlocal() {
   [[ $should_collect_static == true ]] && vex python manage.py collectstatic
 
   if [[ "$platform" == "heroku" ]]; then
-    vex heroku local "${@:2}"
+#    vex heroku local "${@:2}"
+    vex heroku local "$@"
     return $?
   elif [[ "$platform" == "django" ]]; then
     # See manage.py for extra custom cli args
-    vex python manage.py runserver "${@:2}"
+#    vex python manage.py runserver "${@:2}"
+    vex python manage.py runserver "$@"
     return $?
   fi
 }

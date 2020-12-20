@@ -12,9 +12,9 @@ import pyinspect as pi
 from rich.console import Console
 
 con = Console()
-if sys.exc_info()[0] and eval(os.environ.get('DJANGO_HOME_PRETTY_TRACE', 'True')):
-        print('.ipdbeval.py: building fancy trace...')
-        con.print_exception(show_locals=True)
+if sys.exc_info()[0] and eval(os.environ.get('DJANGO_HOME_TASK_PRETTY_TRACE', 'True')):
+    print('.ipdbeval.py: building fancy trace...')
+    con.print_exception(show_locals=True)
 
 
 def mm(topic, subtopic=''):
