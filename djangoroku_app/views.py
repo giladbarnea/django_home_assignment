@@ -95,39 +95,49 @@ def _parse_queryfilter(request, queryfilter: str = None) -> dict:
     return _parse_one_pair(queryfilter)
 
 
+def read_user_msg(request, username: str, queryfilter: str = None) -> HttpResponse:
+    try:
+        user: models.Person = models.Person.objects.get_by_natural_key(username)
+    except models.Person.DoesNotExist as e:
+        return _bad_request(request, f"User with user name: '{username}' does not exist")
+    
+    log.debug(f'{username = }, {user = }')
+    filters = _parse_queryfilter(request, queryfilter)
+    log.debug(f'{queryfilter = }, {filters = }')
+    user_messages: QuerySet = models.Message.objects.filter(sender=user, **filters)
+    if not user_messages:
+        warning = f"Could not find messages where sender = {user}"
+        if filters:
+            warning += f" that match these filters: {filters}"
+        return _respond_warning(request, warning)
+    update_count = user_messages.update(read=True)
+    success = f"Fetched {update_count} Messages where sender = {user}"
+    if filters:
+        success += f" and filters are: {filters}"
+    success += f"\n{user_messages}"
+    return _respond_success(request, success)
+
+
+def read_msg_id(request, msg_id: str) -> HttpResponse:
+    try:
+        msg: models.Message = models.Message.objects.get(id=msg_id)
+    except models.Message.DoesNotExist as e:
+        return _bad_request(request, f"Message with id: '{msg_id}' does not exist")
+    return _respond_success(request, f"Fetched {msg} with id = {msg_id}")
+
+
 def read(request, *args, **kwargs):
     log.debug(f'read({request = }, {args = }, {kwargs = })')
     if not kwargs:
         return _bad_read(request)
-    queryfilter = kwargs.get('filter') or kwargs.get('multifilter')
-    filters = _parse_queryfilter(request, queryfilter)
-    log.debug(f'{queryfilter = }, {filters = }')
-    
     if 'username' in kwargs:
-        username = kwargs['username']
-        try:
-            user: models.Person = models.Person.objects.get_by_natural_key(username)
-        except models.Person.DoesNotExist as e:
-            return _bad_request(request, f"username '{username}' does not exist")
-        log.debug(f'{username = }, {user = }')
-        user_messages: QuerySet = models.Message.objects.filter(sender=user, **filters)
-        if not user_messages:
-            warning = f"Could not find messages where sender = {user}"
-            if filters:
-                warning += f" that match these filters: {filters}"
-            return _respond_warning(request, warning)
-        update_count = user_messages.update(read=True)
-        success = f"Fetched {update_count} Messages where sender = {user}"
-        if filters:
-            success += f" and filters are: {filters}"
-        success += f"\n{user_messages}"
-        return _respond_success(request, success)
+        queryfilter = kwargs.get('filter') or kwargs.get('multifilter')
+        return read_user_msg(request, kwargs['username'], queryfilter)
     
     elif 'msg_id' in kwargs:
-        msg_id = kwargs['msg_id']
+        return read_msg_id(request, kwargs['msg_id'])
     else:
         return _bad_read(request)
-    return HttpResponse(b"Hello from read")
 
 
 def dbg(request, *args, **kwargs):

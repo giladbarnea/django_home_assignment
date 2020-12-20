@@ -24,11 +24,11 @@ read_msg_subpaths = [
     # /read/msg/42
     path(r'<msg_id>/', views.read, name=f'read-msg'),
     
-    # /read/msg/created<TIMESTAMP
-    re_path(r'(?P<msg_id>\w*)/(?P<filter>[\w=]*)/', views.read, name=f'read-msg-filter'),
-    
-    # /read/msg/(created<TIMESTAMP OR sender=catta)
-    re_path(r'(?P<msg_id>\w*)/\((?P<multifilter>[\w= ]*)\)/', views.read, name=f'read-msg-multifilter')
+    # # /read/msg/created<TIMESTAMP
+    # re_path(r'(?P<msg_id>\w*)/(?P<filter>[\w=]*)/', views.read, name=f'read-msg-filter'),
+    #
+    # # /read/msg/(created<TIMESTAMP OR sender=catta)
+    # re_path(r'(?P<msg_id>\w*)/\((?P<multifilter>[\w= ]*)\)/', views.read, name=f'read-msg-multifilter')
     ]
 
 read_subpaths = [
