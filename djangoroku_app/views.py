@@ -5,7 +5,7 @@ from django.shortcuts import HttpResponse
 from rich.console import Console
 
 import logger
-from . import models
+from djangoroku_app import models
 
 console = Console()
 log = logger.getlogger()
@@ -23,10 +23,12 @@ def write(request, *args, **kwargs):
     log.info(f'{data = }')
     
     msg = models.Message(**data)
-    msg.save()
-    log.info(f"saved Message to db: {msg}")
     
-    return HttpResponse(b"Hello from write")
+    msg.save()
+    response = f"saved Message to db: {msg}"
+    log.info(response)
+    
+    return HttpResponse(response.encode(errors='replace'))
 
 
 def read(request, *args, **kwargs):

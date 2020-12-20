@@ -21,14 +21,16 @@ import logger
 import sys
 
 logger.init()
-log = logger.getlogger()
-from django_home_task import settings
 
-log.debug(f'{settings.IPDB = }')
-if settings.IPDB:  # manage.py --no-ipdb sets this to False
+import os
+
+IPDB = eval(os.environ.get('DJANGO_HOME_TASK_IPDB', 'True'))
+if IPDB:  # manage.py --no-ipdb sets this to False
     import ipdb
     
     sys.breakpointhook = ipdb.set_trace
+log = logger.getlogger()
+log.debug(f'{IPDB = }')
 urlpatterns = [
     path(r'', include('djangoroku_app.urls')),
     path('admin/', admin.site.urls),

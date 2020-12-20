@@ -1,10 +1,8 @@
 print(__file__)
 import logging
-from rich.logging import RichHandler
 
 from django_home_task import settings
 from pathlib import Path
-from rich import inspect
 
 old_factory = logging.getLogRecordFactory()
 
@@ -39,18 +37,21 @@ def getlogger(name: str = "main") -> Logger:
 def init():
     """Sets up main Logger config, and hooks any exceptions to use RichHandler"""
     logging.setLogRecordFactory(record_factory)
-    logging.basicConfig(
-            level="DEBUG",
-            # format="%(message)s",
-            # format='%(asctime)s[%(levelname)s]%(filename)s.%(funcName)s():%(lineno)d | %(message)s',
-            # format='%(pathname)s.%(funcName)s():%(lineno)d | %(message)s',
-            format='%(relpath)s.%(funcName)s():%(lineno)d | %(message)s',
-            datefmt="[%X]",
-            handlers=[RichHandler(rich_tracebacks=True,
-                                  tracebacks_show_locals=True,
-                                  locals_max_length=100,
-                                  locals_max_string=160)]
-            )
+    log_config_args = dict(level="DEBUG",
+                           format='%(relpath)s.%(funcName)s():%(lineno)d | %(message)s',
+                           datefmt="[%X]", )
+    import os
+    PRETTY_TRACE = eval(os.environ.get('DJANGO_HOME_TASK_PRETTY_TRACE', 'True'))
+    if PRETTY_TRACE:
+        from rich.logging import RichHandler
+        logging.basicConfig(**log_config_args,
+                            handlers=[RichHandler(rich_tracebacks=True,
+                                                  tracebacks_show_locals=True,
+                                                  locals_max_length=100,
+                                                  locals_max_string=160)]
+                            )
+    else:
+        logging.basicConfig(**log_config_args)
     logging.setLoggerClass(Logger)
     log = getlogger()
-    log.debug('logger initiated')
+    log.debug(f'logger initiated with {PRETTY_TRACE = }')
