@@ -1,4 +1,5 @@
 from contextlib import suppress
+from typing import Optional
 
 from django.db.models import QuerySet
 
@@ -41,7 +42,7 @@ def _bad_request(request, error: str, redirecturl='/'):
 
 def index(request, *args, **kwargs):
     print(f'index(args: {args}, kwargs: {kwargs})')
-    return HttpResponse(b"Hello from index")
+    return HttpResponse(b"Your'e in index, i.e. '/'")
 
 
 def write(request, *args, **kwargs):
@@ -61,13 +62,24 @@ def write(request, *args, **kwargs):
 def _bad_read(request):
     error = "\n".join((f"'/read' endpoint must be of either the following forms:",
                        f"/read/user/USERNAME[/filter or multifilter]",
-                       f"/read/msg/MSG_ID[/filter or multifilter]",
+                       f"/read/msg/MSG_ID",
+                       f"Instead, you tried to access '{request.path}'",
+                       "Redirecting..."))
+    return _bad_request(request, error)
+
+
+def _bad_delete(request):
+    error = "\n".join((f"'/delete' endpoint must be of either the following forms:",
+                       f"/delete/MSG_ID",
                        f"Instead, you tried to access '{request.path}'",
                        "Redirecting..."))
     return _bad_request(request, error)
 
 
 def _parse_queryfilter(request, queryfilter: str = None) -> dict:
+    """Translates 'read=false', or '(read=false AND receiver=daniel)'
+     to {'read':False} or {'read':False, 'receiver':'daniel'} respectively
+     """
     if not queryfilter:
         return {}
     if 'OR' in queryfilter:
@@ -75,6 +87,7 @@ def _parse_queryfilter(request, queryfilter: str = None) -> dict:
         return {}
     
     def _parse_one_pair(_query: str) -> dict:
+        """Translates 'read=false' to {'read':False}"""
         _prop, _, _val = map(str.strip, _query.strip().partition('='))
         with suppress(AttributeError):
             # AttributeError is raised when _val is bool, which is what we want in the first place
@@ -95,15 +108,29 @@ def _parse_queryfilter(request, queryfilter: str = None) -> dict:
     return _parse_one_pair(queryfilter)
 
 
-def read_user_msg(request, username: str, queryfilter: str = None) -> HttpResponse:
+def _get_person_by_username(username) -> Optional[models.Person]:
     try:
         user: models.Person = models.Person.objects.get_by_natural_key(username)
+        return user
     except models.Person.DoesNotExist as e:
+        return None
+
+
+def read_user_msg(request, username: str, queryfilter: str = None) -> HttpResponse:
+    user = _get_person_by_username(username)
+    if user is None:
         return _bad_request(request, f"User with user name: '{username}' does not exist")
     
     log.debug(f'{username = }, {user = }')
-    filters = _parse_queryfilter(request, queryfilter)
+    filters: dict = _parse_queryfilter(request, queryfilter)
     log.debug(f'{queryfilter = }, {filters = }')
+    if 'receiver' in filters:
+        receiver_username = filters.get('receiver')
+        receiver = _get_person_by_username(receiver_username)
+        if receiver is None:
+            return _respond_warning(request, (f"Could not find messages where sender = {user} and filters are {filters}, "
+                                              f"because receiver '{receiver_username}' does not exist"))
+        filters['receiver'] = receiver.id
     user_messages: QuerySet = models.Message.objects.filter(sender=user, **filters)
     if not user_messages:
         warning = f"Could not find messages where sender = {user}"
@@ -114,16 +141,34 @@ def read_user_msg(request, username: str, queryfilter: str = None) -> HttpRespon
     success = f"Fetched {update_count} Messages where sender = {user}"
     if filters:
         success += f" and filters are: {filters}"
-    success += f"\n{user_messages}"
+    success += f"All of them are now marked as read=True.\n{user_messages}"
     return _respond_success(request, success)
 
 
-def read_msg_id(request, msg_id: str) -> HttpResponse:
+def _get_msg_by_id(msg_id: str) -> Optional[models.Message]:
     try:
         msg: models.Message = models.Message.objects.get(id=msg_id)
     except models.Message.DoesNotExist as e:
+        return None
+    return msg
+
+
+def read_msg_by_id(request, msg_id: str) -> HttpResponse:
+    msg = _get_msg_by_id(msg_id)
+    if msg is None:
         return _bad_request(request, f"Message with id: '{msg_id}' does not exist")
-    return _respond_success(request, f"Fetched {msg} with id = {msg_id}")
+    msg.read = True
+    msg.save()
+    return _respond_success(request, f"Fetched {msg} with id = {msg_id}. It is now marked as read=True.")
+
+
+def delete_msg_by_id(request, msg_id: str) -> HttpResponse:
+    msg = _get_msg_by_id(msg_id)
+    if msg is None:
+        return _bad_request(request, f"Message with id: '{msg_id}' does not exist")
+    num, dikt = msg.delete()
+    breakpoint()
+    return _respond_success(request, f"Deleted {msg} with id = {msg_id}")
 
 
 def read(request, *args, **kwargs):
@@ -135,9 +180,17 @@ def read(request, *args, **kwargs):
         return read_user_msg(request, kwargs['username'], queryfilter)
     
     elif 'msg_id' in kwargs:
-        return read_msg_id(request, kwargs['msg_id'])
+        return read_msg_by_id(request, kwargs['msg_id'])
     else:
         return _bad_read(request)
+
+
+def delete(request, *args, **kwargs):
+    log.debug(f'delete({request = }, {args = }, {kwargs = })')
+    msg_id = kwargs.get('msg_id')
+    if not msg_id:
+        return _bad_delete(request)
+    return delete_msg_by_id(request, kwargs['msg_id'])
 
 
 def dbg(request, *args, **kwargs):

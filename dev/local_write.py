@@ -36,7 +36,7 @@ if __name__ == '__main__':
             letter = string.ascii_lowercase[random.randint(0, len(string.ascii_lowercase) - 1)]
             otherletters.append(letter)
             lastletter = otherletters[-1]
-        
+            
             if lastletter != ' ' and random.random() < 0.3:
                 otherletters.append(' ')
             
@@ -50,8 +50,8 @@ if __name__ == '__main__':
     
     import string
     
-    sender = 'catta'
-    receiver = 'morki'
+    sender = None
+    receiver = None
     message = time.strftime("%T")
     subject = randstr()
     for arg in sys.argv[1:]:
@@ -63,4 +63,8 @@ if __name__ == '__main__':
             message = arg[10:]
         if arg.startswith('--subject='):
             subject = arg[10:]
+    if not sender:
+        print('FAIL: must specify "--sender=SENDER"')
+    if not receiver:
+        print('FAIL: must specify "--receiver=RECEIVER"')
     main(sender, receiver, message, subject)

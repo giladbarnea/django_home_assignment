@@ -5,13 +5,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from django.contrib.auth import get_user_model
-from djangoroku_app.error import ReceiverDoesNotExist
 from logger import getlogger
 
 log = getlogger()
 
 
 class AbstractModel(models.Model):
+    """Model to inherit from that displays props and values nicely"""
+    
     class Meta:
         abstract = True
     
@@ -22,7 +23,6 @@ class AbstractModel(models.Model):
         return self.__class__.__qualname__
     
     def __str__(self):
-        """Pretty string displaying the instance's field names and values conveniently"""
         attrs = []
         for attname in [f.attname for f in self._meta.concrete_fields]:
             attval = repr(getattr(self, attname, None))
@@ -31,13 +31,6 @@ class AbstractModel(models.Model):
             attrs.append(f"{attname}: {attval}")
         attrs_str = "\n\t" + "\n\t".join(attrs)
         return f"{self.__class__.__qualname__}{attrs_str}"
-    
-    def _get_missing_fields(self, *provided: str) -> List[str]:
-        missing_fields = []
-        for field in self.REQUIRED_FIELDS:
-            if field not in provided:
-                missing_fields.append(field)
-        return missing_fields
 
 
 def get_sentinel_user():
@@ -46,7 +39,6 @@ def get_sentinel_user():
 
 class Person(User, AbstractModel):
     pass
-    # username = models.CharField("The sender's username", max_length=100, null=False, unique=False)
 
 
 class Message(AbstractModel):
@@ -63,11 +55,6 @@ class Message(AbstractModel):
     def __init__(self, *args, **kwargs):
         log.verbose(f'{self.__class__.__qualname__}({args = }, {kwargs = })')
         
-        # missing_fields = self._get_missing_fields(*kwargs)
-        # if missing_fields:
-        #     raise KeyError(f"{self.clsname}() requires the following fields: {', '.join(map(repr, self.REQUIRED_FIELDS))}. "
-        #                    f"The following fields were not provided: {', '.join(map(repr, missing_fields))}")
-        
         fields = kwargs  # default
         sender_username = kwargs.get('sender')
         if sender_username:
@@ -77,16 +64,7 @@ class Message(AbstractModel):
         if receiver_username:
             receiver = Person.objects.get(username=receiver_username)
             fields['receiver'] = receiver
-        # receiver_username = kwargs['receiver']
-        # subject = kwargs['subject']
-        # message = kwargs['message']
-        # sender = Person.objects.get(username=sender_username)
-        # receiver = Person.objects.get(username=receiver_username)
-        # super().__init__(*args, sender=sender, receiver=receiver, subject=subject, message=message)
-        # self.sender = sender
-        # self.receiver = receiver
-        # self.message = message
-        # self.subject = subject
+        
         super().__init__(*args, **fields)
     
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
