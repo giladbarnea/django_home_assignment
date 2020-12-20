@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_HOME_TASK_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost']
 
@@ -124,13 +124,13 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-#########################
-#### CUSTOM SETTINGS #### (mostly debug purposes)
-#########################
-
-# Controls whether sys.breakpointhook is set to ipdb.set_trace or left as-is (in django_home_task/urls.py)
-# manage.py --no-ipdb to set to False
-IPDB = eval(os.environ.get('DJANGO_HOME_TASK_IPDB', 'True'))
-
-PRETTY_TRACE = eval(os.environ.get('DJANGO_HOME_TASK_PRETTY_TRACE', 'True'))
+# #########################
+# #### CUSTOM SETTINGS #### (mostly debug purposes)
+# #########################
+#
+# # Controls whether sys.breakpointhook is set to ipdb.set_trace or left as-is (in django_home_task/urls.py)
+# # manage.py --no-ipdb to set to False
+# IPDB = eval(os.environ.get('DJANGO_HOME_TASK_IPDB', 'True'))
+#
+# PRETTY_TRACE = eval(os.environ.get('DJANGO_HOME_TASK_PRETTY_TRACE', 'True'))
 django_heroku.settings(locals())

@@ -23,6 +23,31 @@ def main(sender, receiver, message, subject):
     print(response.text)
 
 
+def help():
+    print(f"""
+    write.py --sender=SENDER --receiver=RECEIVER [OPTIONS]
+    
+    Utility to test /write/... functionality
+
+    SENDER, RECEIVER
+        A username.
+
+    OPTIONS
+        --message=MESSAGE       defaults to current date time, e.g. 'Sun Dec 20 22:59:50 2020'
+        --subject=SUBJECT       defaults to some random nordish-looking words
+
+    EXAMPLES
+        write.py --sender=john --receiver=daniel
+        write.py --sender=john --receiver=daniel --message='Hello World'
+        write.py --sender=john --receiver=daniel --subject='Hello' --message='World'
+    """)
+
+
+def shorthelp():
+    print("""write.py --sender=SENDER --receiver=RECEIVER [OPTIONS]
+    Pass "-h" or "--help" for usage instructions.""")
+
+
 if __name__ == '__main__':
     import random
     
@@ -55,16 +80,23 @@ if __name__ == '__main__':
     message = time.strftime("%T")
     subject = randstr()
     for arg in sys.argv[1:]:
+        if arg == '-h' or 'help' in arg:
+            help()
+            sys.exit(0)
         if arg.startswith('--sender='):
             sender = arg[9:]
-        if arg.startswith('--receiver='):
+        elif arg.startswith('--receiver='):
             receiver = arg[11:]
-        if arg.startswith('--message='):
+        elif arg.startswith('--message='):
             message = arg[10:]
-        if arg.startswith('--subject='):
+        elif arg.startswith('--subject='):
             subject = arg[10:]
-    if not sender:
-        print('FAIL: must specify "--sender=SENDER"')
-    if not receiver:
-        print('FAIL: must specify "--receiver=RECEIVER"')
+        else:
+            print(f"WARN: unknown arg '{arg}'")
+            help()
+    if not sender or not receiver:
+        print('ERROR: must specify "--sender=SENDER" and "--receiver=RECEIVER"')
+        help()
+    else:
+        shorthelp()
     main(sender, receiver, message, subject)

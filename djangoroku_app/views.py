@@ -1,19 +1,18 @@
+print(__file__)
 from contextlib import suppress
 from typing import Optional
 
 from django.db.models import QuerySet
 
-print(__file__)
 from django.contrib import messages
 import json
 
 from django.shortcuts import HttpResponse, redirect
-from rich.console import Console
 
 import logger
 from djangoroku_app import models
+from djangoroku_app.error import ReceiverDoesNotExist, SenderDoesNotExist
 
-console = Console()
 log = logger.getLogger()
 
 
@@ -34,29 +33,9 @@ def _respond_success(request, success: str):
     return HttpResponse(success.encode(errors='replace'))
 
 
-def _bad_request(request, error: str, redirecturl='/'):
-    messages.error(request, error)
-    log.error(error, stacklevel=2)
+def _respond_error_and_redirect(request, error: str, redirecturl='/'):
+    _error(request, error)
     return redirect(redirecturl)
-
-
-def index(request, *args, **kwargs):
-    print(f'index(args: {args}, kwargs: {kwargs})')
-    return HttpResponse(b"Your'e in index, i.e. '/'")
-
-
-def write(request, *args, **kwargs):
-    log.debug(f'write({request = }, {args = }, {kwargs = })')
-    data = json.loads(request.body.decode())
-    log.info(f'{data = }')
-    
-    msg = models.Message(**data)
-    
-    msg.save()
-    response = f"saved Message to db: {msg}"
-    log.info(response)
-    
-    return HttpResponse(response.encode(errors='replace'))
 
 
 def _bad_read(request):
@@ -65,7 +44,7 @@ def _bad_read(request):
                        f"/read/msg/MSG_ID",
                        f"Instead, you tried to access '{request.path}'",
                        "Redirecting..."))
-    return _bad_request(request, error)
+    return _respond_error_and_redirect(request, error)
 
 
 def _bad_delete(request):
@@ -73,7 +52,7 @@ def _bad_delete(request):
                        f"/delete/MSG_ID",
                        f"Instead, you tried to access '{request.path}'",
                        "Redirecting..."))
-    return _bad_request(request, error)
+    return _respond_error_and_redirect(request, error)
 
 
 def _parse_queryfilter(request, queryfilter: str = None) -> dict:
@@ -108,25 +87,61 @@ def _parse_queryfilter(request, queryfilter: str = None) -> dict:
     return _parse_one_pair(queryfilter)
 
 
-def _get_person_by_username(username) -> Optional[models.Person]:
+def _get_person_by_username(request, username) -> Optional[models.Person]:
     try:
         user: models.Person = models.Person.objects.get_by_natural_key(username)
         return user
     except models.Person.DoesNotExist as e:
+        _error(request, f"User with user name: '{username}' does not exist")
+        return None
+    except Exception as e:
+        _error(request, f"{e.__class__.__qualname__} when trying to get person by username: '{username}': {', '.join(map(repr, e.args))}")
         return None
 
 
+def _get_msg_by_id(request, msg_id: str) -> Optional[models.Message]:
+    try:
+        msg: models.Message = models.Message.objects.get(id=msg_id)
+    except models.Message.DoesNotExist as e:
+        _error(request, f"Message with id: '{msg_id}' does not exist")
+        return None
+    except Exception as e:
+        _error(request, f"{e.__class__.__qualname__} when trying to get message by id: '{msg_id}': {', '.join(map(repr, e.args))}")
+        return None
+    return msg
+
+
+def index(request, *args, **kwargs):
+    return HttpResponse()
+
+
+def write(request, *args, **kwargs):
+    log.debug(f'write({request = }, {args = }, {kwargs = })')
+    data = json.loads(request.body.decode())
+    log.info(f'{data = }')
+    
+    try:
+        msg = models.Message(**data)
+    except SenderDoesNotExist as se:
+        return _respond_error_and_redirect(request, f"Sender with user name: '{se.username}' does not exist")
+    except ReceiverDoesNotExist as re:
+        return _respond_error_and_redirect(request, f"Receiver with user name: '{re.username}' does not exist")
+    
+    msg.save()
+    return _respond_success(request, f"saved Message to db: {msg}")
+
+
 def read_user_msg(request, username: str, queryfilter: str = None) -> HttpResponse:
-    user = _get_person_by_username(username)
+    user = _get_person_by_username(request, username)
     if user is None:
-        return _bad_request(request, f"User with user name: '{username}' does not exist")
+        return redirect('/')
     
     log.debug(f'{username = }, {user = }')
     filters: dict = _parse_queryfilter(request, queryfilter)
     log.debug(f'{queryfilter = }, {filters = }')
     if 'receiver' in filters:
         receiver_username = filters.get('receiver')
-        receiver = _get_person_by_username(receiver_username)
+        receiver = _get_person_by_username(request, receiver_username)
         if receiver is None:
             return _respond_warning(request, (f"Could not find messages where sender = {user} and filters are {filters}, "
                                               f"because receiver '{receiver_username}' does not exist"))
@@ -140,34 +155,28 @@ def read_user_msg(request, username: str, queryfilter: str = None) -> HttpRespon
     update_count = user_messages.update(read=True)
     success = f"Fetched {update_count} Messages where sender = {user}"
     if filters:
-        success += f" and filters are: {filters}"
-    success += f"All of them are now marked as read=True.\n{user_messages}"
+        success += f" and filters are: {filters}."
+    success += f" All of them are now marked as read=True.\n{user_messages}"
     return _respond_success(request, success)
 
 
-def _get_msg_by_id(msg_id: str) -> Optional[models.Message]:
-    try:
-        msg: models.Message = models.Message.objects.get(id=msg_id)
-    except models.Message.DoesNotExist as e:
-        return None
-    return msg
-
-
 def read_msg_by_id(request, msg_id: str) -> HttpResponse:
-    msg = _get_msg_by_id(msg_id)
+    msg = _get_msg_by_id(request, msg_id)
     if msg is None:
-        return _bad_request(request, f"Message with id: '{msg_id}' does not exist")
+        return redirect('/')
     msg.read = True
     msg.save()
     return _respond_success(request, f"Fetched {msg} with id = {msg_id}. It is now marked as read=True.")
 
 
 def delete_msg_by_id(request, msg_id: str) -> HttpResponse:
-    msg = _get_msg_by_id(msg_id)
+    msg = _get_msg_by_id(request, msg_id)
     if msg is None:
-        return _bad_request(request, f"Message with id: '{msg_id}' does not exist")
-    num, dikt = msg.delete()
-    breakpoint()
+        return redirect('/')
+    try:
+        delete_count, _ = msg.delete()
+    except Exception as e:
+        return _respond_error_and_redirect(request, f"{e.__class__.__qualname__} when deleting {msg} with id = {msg_id}")
     return _respond_success(request, f"Deleted {msg} with id = {msg_id}")
 
 

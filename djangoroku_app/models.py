@@ -1,11 +1,11 @@
-from typing import List
-
 print(__file__)
+
 from django.db import models
 from django.contrib.auth.models import User
 
 from django.contrib.auth import get_user_model
 from logger import getlogger
+from djangoroku_app.error import ReceiverDoesNotExist, SenderDoesNotExist
 
 log = getlogger()
 
@@ -58,15 +58,19 @@ class Message(AbstractModel):
         fields = kwargs  # default
         sender_username = kwargs.get('sender')
         if sender_username:
-            sender = Person.objects.get(username=sender_username)
+            try:
+                sender = Person.objects.get(username=sender_username)
+            except Person.DoesNotExist as e:
+                
+                raise SenderDoesNotExist(username=sender_username)
             fields['sender'] = sender
         receiver_username = kwargs.get('receiver')
         if receiver_username:
-            receiver = Person.objects.get(username=receiver_username)
+            try:
+                receiver = Person.objects.get(username=receiver_username)
+            except Person.DoesNotExist as e:
+                
+                raise ReceiverDoesNotExist(username=sender_username)
             fields['receiver'] = receiver
         
         super().__init__(*args, **fields)
-    
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super().save(force_insert, force_update, using, update_fields)
-        # todo: User / sender
