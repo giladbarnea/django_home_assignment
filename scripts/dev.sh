@@ -82,13 +82,6 @@ function killproc() {
 function runlocal() {
   _is_in_virenv || return 1
 
-  #  local platform="$1"
-  #  if [[ "$platform" == "heroku" ]]; then
-  #    killproc '.*heroku\-cli.*start' || return 1
-  #  elif [[ "$platform" == "django" ]]; then
-  #    killproc '.*manage\.py runserver' || return 1
-  #  fi
-
   local platform
   local should_collect_static=true
   local should_migrate=true
@@ -114,6 +107,18 @@ function runlocal() {
       should_migrate=false
       shift
       ;;
+    --no-ipdb)
+      export DJANGO_HOME_TASK_IPDB=False
+      shift
+      ;;
+    --no-pretty-trace)
+      export DJANGO_HOME_TASK_PRETTY_TRACE=False
+      shift
+      ;;
+    --verbose)
+      export DJANGO_HOME_TASK_VERBOSE=True
+      shift
+      ;;
     *)
       POSITIONAL+=("$1")
       shift
@@ -121,14 +126,9 @@ function runlocal() {
 
     esac
   done
-  #  for i in {1..10}; do
-  #    if [[ "${*[$i]}" == "--nostatic" ]]; then
-  #      should_collect_static=false
-  #    fi
-  #    if [[ "${*[$i]}" == "--no-migrate" ]]; then
-  #      should_migrate=false
-  #    fi
-  #  done
+  [[ "$DJANGO_HOME_TASK_IPDB" == False ]] || export DJANGO_HOME_TASK_IPDB=True
+  [[ "$DJANGO_HOME_TASK_PRETTY_TRACE" == False ]] || export DJANGO_HOME_TASK_PRETTY_TRACE=True
+  [[ "$DJANGO_HOME_TASK_VERBOSE" == True ]] || export DJANGO_HOME_TASK_VERBOSE=False
   if [[ "$should_migrate" == true ]]; then
     vex python manage.py makemigrations || return 1
     vex python manage.py migrate || return 1
@@ -136,12 +136,10 @@ function runlocal() {
   [[ $should_collect_static == true ]] && vex python manage.py collectstatic
 
   if [[ "$platform" == "heroku" ]]; then
-#    vex heroku local "${@:2}"
     vex heroku local "$@"
     return $?
   elif [[ "$platform" == "django" ]]; then
     # See manage.py for extra custom cli args
-#    vex python manage.py runserver "${@:2}"
     vex python manage.py runserver "$@"
     return $?
   fi

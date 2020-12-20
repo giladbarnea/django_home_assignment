@@ -4,6 +4,9 @@ import logging
 from django_home_task import settings
 from pathlib import Path
 
+import os
+from logging import getLogger
+
 old_factory = logging.getLogRecordFactory()
 
 
@@ -19,23 +22,28 @@ def record_factory(*args, **kwargs):
     return record
 
 
-class Logger(logging.Logger):
-    name = "main"
+class Logger(logging.RootLogger):
+    name = "root"
     
-    def __init__(self, name: str, level=logging.NOTSET):
-        super().__init__(name, level)
+    def __init__(self, name: str = "root", level=logging.DEBUG):
+        super().__init__(level)
+        self._verbose = eval(os.environ.get('DJANGO_HOME_TASK_VERBOSE', 'False'))
+        self.debug(f'VERBOSE = {self._verbose}')
     
-    # def logattr(self, obj, name: str, default=None):
-    #     inspect(getattr(obj, name, default), docs=False, title=f'{obj}.{name}')
+    def verbose(self, msg, *args, **kwargs):
+        if self._verbose:
+            super().debug(msg, *args, **kwargs)
 
 
-def getlogger(name: str = "main") -> Logger:
-    log = logging.getLogger(name)
+def getlogger(name: str = "root") -> Logger:
+    log = Logger()
+    # print(type(log), log.__class__, log.name)
+    assert hasattr(log, 'verbose')
     return log
 
 
 def init():
-    """Sets up main Logger config, and hooks any exceptions to use RichHandler"""
+    """Sets up root Logger config, and hooks any exceptions to use RichHandler"""
     logging.setLogRecordFactory(record_factory)
     log_config_args = dict(level="DEBUG",
                            format='%(relpath)s.%(funcName)s():%(lineno)d | %(message)s',
@@ -52,6 +60,7 @@ def init():
                             )
     else:
         logging.basicConfig(**log_config_args)
-    logging.setLoggerClass(Logger)
-    log = getlogger()
+    # logging.setLoggerClass(Logger)
+    
+    log = logging.getLogger()
     log.debug(f'logger initiated with {PRETTY_TRACE = }')

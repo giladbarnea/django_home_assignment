@@ -29,7 +29,7 @@ if IPDB:  # manage.py --no-ipdb sets this to False
     import ipdb
     
     sys.breakpointhook = ipdb.set_trace
-log = logger.getlogger()
+log = logger.getLogger()
 log.debug(f'{IPDB = }')
 urlpatterns = [
     path(r'', include('djangoroku_app.urls')),
