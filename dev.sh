@@ -136,10 +136,10 @@ function runlocal() {
 runlocal <ENV> [OPTIONS]
 $c0
 Runs the app locally (either django or heroku), but first, takes care of:
-- virtual environment and active python version
-- pre-existing processes (if exist)
+- virtual environment, verifies correct python and django versions
+- pre-existing process: kill it if exists
 - runs makemigrations and migrate
-- environment variables
+- environment variables (see below)
 $bold
 Usage:
 $c0

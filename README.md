@@ -18,11 +18,15 @@ $ (env) python dev/delete.py --help
 ```
 
 ## Run locally
-
+#### Unix
 ```bash
 $ source dev.sh     # loads two functions: runlocal, deploy
-$ runlocal --help   # prints instructions
+$ runlocal --help   # prints instructions about how runlocal does version, environment and process checks before running 'manage.py runserver'
 ```
+#### Windows
+Make sure python version is 3.8 and django is 3.1 (not 3.0).
+A virtual env based on `requirements.txt` is failsafe.
+See [Note on environment variables](#Note-on-environment-variables) 
 
 ## Deploy
 
@@ -41,3 +45,5 @@ to run.
 `DJANGO_HOME_TASK_IPDB`, `DJANGO_HOME_TASK_PRETTY_TRACE`, and `DJANGO_HOME_TASK_VERBOSE` are optional and are for debugging purposes.
 
 `DJANGO_HOME_TASK_IPDB` and `DJANGO_HOME_TASK_VERBOSE` are `False` by default. `DJANGO_HOME_TASK_PRETTY_TRACE` is `True` by default.
+
+Windows users can set env vars via e.g. `setx DJANGO_HOME_TASK_PRETTY_TRACE False`.
