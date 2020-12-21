@@ -11,7 +11,7 @@ from django.shortcuts import HttpResponse
 import logger
 from djangoroku_app import models
 from djangoroku_app.error import ReceiverDoesNotExist, SenderDoesNotExist
-
+from django.views.decorators.csrf import csrf_exempt
 log = logger.getLogger()
 
 
@@ -231,13 +231,18 @@ def delete(request, *args, **kwargs):
     return delete_msg_by_id(request, kwargs['msg_id'])
 
 
+# @csrf_exempt
 def write(request, *args, **kwargs) -> HttpResponse:
     """Expects an Ajax call, not URL params. Run './dev/write.py -h' for instructions."""
     log.debug(f'write({request = }, {args = }, {kwargs = })')
     try:
-        data = json.loads(request.body.decode(errors='replace'))
+        data = json.loads(request.body.decode())
     except Exception as e:
-        return _bad_write(request)
+        extra = "\n".join((f"{e.__class__.__qualname__} when trying to create a message",
+                           f"Exception args: {', '.join(map(repr, e.args))}",
+                           f"{request.body = }",
+                           ))
+        return _bad_write(request, extra)
     
     log.info(f'{data = }')
     

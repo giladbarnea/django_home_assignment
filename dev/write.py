@@ -1,26 +1,28 @@
 #!/usr/bin/env python3.8
 
 
-def main(sender, receiver, message, subject, localhost: bool, port):
+def main(_sender, _receiver, _message, _subject, _localhost: bool, _port):
     import requests
     import json
-    if localhost:
-        url = f"http://localhost:{port}/write"
+    if _localhost:
+        _url = f"http://localhost:{_port}/write/"
+        csrftoken = '2Q2QAtNm2YIoaaVW17Pi2lDF3dYai9cfs4eso1O0RNn1gfuziKCRdR8qZ60yP9R6'
     else:
-        url = f"https://django-home-task-gb.herokuapp.com/write"
+        _url = f"https://django-home-task-gb.herokuapp.com/write/"
+        csrftoken = '9IqrE26wnoaEqHSIradW4AGYCfsc1nk0AapP14xtSPcOlZEP0NHuXrNq9NwcptfE'
     
     headers = {
-        'X-CSRFToken':  '2Q2QAtNm2YIoaaVW17Pi2lDF3dYai9cfs4eso1O0RNn1gfuziKCRdR8qZ60yP9R6',
+        'X-CSRFToken':  csrftoken,
         'Content-Type': 'application/json',
-        'Cookie':       'csrftoken=2Q2QAtNm2YIoaaVW17Pi2lDF3dYai9cfs4eso1O0RNn1gfuziKCRdR8qZ60yP9R6',
+        # 'Cookie':       f'csrftoken={csrftoken}',
         
         }
-    print('\n', f'{sender = }', f'{receiver = }', f'{message = }', f'{subject = }', sep='\n', end='\n')
-    response = requests.request("POST", url, headers=headers, data=json.dumps({
-        "sender":   sender,
-        "receiver": receiver,
-        "message":  message,
-        "subject":  subject
+    print('\n', f'{_sender = }', f'{_receiver = }', f'{_message = }', f'{_subject = }', f'{headers = }', sep='\n', end='\n')
+    response = requests.request("POST", _url, headers=headers, data=json.dumps({
+        "sender":   _sender,
+        "receiver": _receiver,
+        "message":  _message,
+        "subject":  _subject
         }))
     
     print(response.text)
@@ -107,6 +109,7 @@ if __name__ == '__main__':
         else:
             print(f"WARN: unknown arg '{arg}'")
             help()
+            sys.exit(1)
     if not sender or not receiver:
         print('ERROR: must specify "--sender=SENDER" and "--receiver=RECEIVER"')
         help()

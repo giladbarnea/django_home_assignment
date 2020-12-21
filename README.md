@@ -17,3 +17,8 @@ python dev/read.py --help
 python dev/write.py --help
 python dev/delete.py --help
 ```
+## Deploy
+```bash
+source dev.sh
+deploy
+```
