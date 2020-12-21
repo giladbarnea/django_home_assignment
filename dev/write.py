@@ -1,10 +1,13 @@
 #!/usr/bin/env python3.8
 
 
-def main(sender, receiver, message, subject):
+def main(sender, receiver, message, subject, localhost: bool, port):
     import requests
     import json
-    url = "http://127.0.0.1:8000/write/"
+    if localhost:
+        url = f"http://localhost:{port}/write"
+    else:
+        url = f"https://django-home-task-gb.herokuapp.com/write"
     
     headers = {
         'X-CSRFToken':  '2Q2QAtNm2YIoaaVW17Pi2lDF3dYai9cfs4eso1O0RNn1gfuziKCRdR8qZ60yP9R6',
@@ -35,9 +38,12 @@ def help():
     OPTIONS
         --message=MESSAGE       defaults to current date time, e.g. 'Sun Dec 20 22:59:50 2020'
         --subject=SUBJECT       defaults to some random nordish-looking words
+        --localhost [--port=PORT]       Sets url to http://localhost:<PORT>/delete. PORT defaults to 8000.
+                                        If unspecified, url is https://django-home-task-gb.herokuapp.com/delete
 
     EXAMPLES
         write.py --sender=john --receiver=daniel
+        write.py --sender=john --receiver=daniel --localhost --port=8001
         write.py --sender=john --receiver=daniel --message='Hello World'
         write.py --sender=john --receiver=daniel --subject='Hello' --message='World'
     """)
@@ -77,8 +83,10 @@ if __name__ == '__main__':
     
     sender = None
     receiver = None
-    message = time.strftime("%T")
+    message = time.strftime("%c")
     subject = randstr()
+    localhost = False
+    port = None
     for arg in sys.argv[1:]:
         if arg == '-h' or 'help' in arg:
             help()
@@ -91,6 +99,11 @@ if __name__ == '__main__':
             message = arg[10:]
         elif arg.startswith('--subject='):
             subject = arg[10:]
+        elif arg.startswith('--localhost'):
+            localhost = True
+            port = 8000
+        elif arg.startswith('--port='):
+            port = arg[7:]
         else:
             print(f"WARN: unknown arg '{arg}'")
             help()
@@ -99,4 +112,4 @@ if __name__ == '__main__':
         help()
     else:
         shorthelp()
-    main(sender, receiver, message, subject)
+    main(sender, receiver, message, subject, localhost, port)

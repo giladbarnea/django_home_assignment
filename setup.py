@@ -34,7 +34,7 @@ setup_args = dict(name='django_home_assignment',
                               'ipython_autoimport',
                               'semver',
                               'birdseye',
-                              'ipdb @ git+ssh://git@github.com/giladbarnea/pyinspect@v0.13.4#egg=pyinspect'
+                              'pyinspect @ git+ssh://git@github.com/giladbarnea/pyinspect@v0.13.4#egg=pyinspect'
                               'requests',
                               'pgcli',
                               'jupyter'

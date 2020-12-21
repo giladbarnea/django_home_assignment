@@ -61,7 +61,6 @@ class Message(AbstractModel):
             try:
                 sender = Person.objects.get(username=sender_username)
             except Person.DoesNotExist as e:
-                
                 raise SenderDoesNotExist(username=sender_username)
             fields['sender'] = sender
         receiver_username = kwargs.get('receiver')
@@ -69,8 +68,7 @@ class Message(AbstractModel):
             try:
                 receiver = Person.objects.get(username=receiver_username)
             except Person.DoesNotExist as e:
-                
-                raise ReceiverDoesNotExist(username=sender_username)
+                raise ReceiverDoesNotExist(username=receiver_username)
             fields['receiver'] = receiver
         
         super().__init__(*args, **fields)

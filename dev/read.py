@@ -1,9 +1,12 @@
 #!/usr/bin/env python3.8
 
 
-def main(mode, subpath, queryfilter):
+def main(mode, subpath, queryfilter, localhost: bool, port):
     import requests
-    url = f"http://localhost:8000/read"
+    if localhost:
+        url = f"http://localhost:{port}/read"
+    else:
+        url = f"https://django-home-task-gb.herokuapp.com/read"
     if mode:
         url += f"/{mode}"
     if subpath:
@@ -17,7 +20,8 @@ def main(mode, subpath, queryfilter):
         'Cookie':       'csrftoken=2Q2QAtNm2YIoaaVW17Pi2lDF3dYai9cfs4eso1O0RNn1gfuziKCRdR8qZ60yP9R6',
         
         }
-    
+
+    print('\n', f'{mode = }', f'{subpath = }', f'{queryfilter = }', sep='\n', end='\n')
     response = requests.request("GET", url, headers=headers)
     
     print(response.text)
@@ -39,9 +43,12 @@ def help():
     OPTIONS
         --filter=FILTER is available if MODE is 'user'.
         --msg_id=MSG_ID is available if MODE is 'msg'.
+        --localhost [--port=PORT]       Sets url to http://localhost:<PORT>/read. PORT defaults to 8000.
+                                        If unspecified, url is https://django-home-task-gb.herokuapp.com/read
         
     EXAMPLES
         read.py user --username=john
+        read.py user --username=john --localhost --port=8001
         read.py user --username=john --filter='read=false'
         read.py user --username=john --filter='(read=true AND receiver=daniel)'
         read.py msg --msg_id=42
@@ -58,8 +65,9 @@ if __name__ == '__main__':
     
     mode = None  # 'user' or 'msg'
     subpath = None  # username or message id
-    
     queryfilter = None
+    localhost = False
+    port = None
     for arg in sys.argv[1:]:
         if arg == '-h' or 'help' in arg:
             help()
@@ -70,6 +78,11 @@ if __name__ == '__main__':
             subpath = arg[11:]
         elif arg.startswith('--filter='):
             queryfilter = arg[9:]
+        elif arg.startswith('--localhost'):
+            localhost = True
+            port = 8000
+        elif arg.startswith('--port='):
+            port = arg[7:]
         elif arg == 'msg':
             mode = 'msg'
         elif arg.startswith('--msg_id=') or arg.startswith('--msg-id='):
@@ -87,4 +100,4 @@ if __name__ == '__main__':
     else:
         shorthelp()
     
-    main(mode, subpath, queryfilter)
+    main(mode, subpath, queryfilter, localhost, port)

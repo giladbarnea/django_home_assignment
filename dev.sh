@@ -110,7 +110,7 @@ function deploy() {
       return 1
     fi
     vex git add .
-    echo -n "${bold}Commit message:${c0}\n>"
+    echo -n "${bold}Commit message: (no quotes)${c0}\n> "
     local commitmsg
     read -r commitmsg
     vex git commit -m "'$commitmsg'" || return 1
@@ -144,7 +144,7 @@ $bold
 Usage:
 $c0
 $ runlocal    ${grey}does migrations safely and verbosely${c0}
-$ runlocal django [MANAGE.PY BUILT-IN OPTIONS] [--no-migrate] [--no-ipdb] [--no-pretty-trace] [--verbose]
+$ runlocal django [MANAGE.PY BUILT-IN OPTIONS] [--no-migrate] [--ipdb, --no-ipdb] [--pretty-trace, --no-pretty-trace] [--verbose]
 $ runlocal heroku [HEROKU LOCAL BUILT-IN OPTIONS]
 $bold
 Example:
@@ -180,12 +180,18 @@ and are toggled and exported by optional '--no-ipdb', '--no-pretty-trace' and '-
       ;;
     --no-ipdb)
       export DJANGO_HOME_TASK_IPDB=False
-      POSITIONAL+=("$1")
+      shift
+      ;;
+    --ipdb)
+      export DJANGO_HOME_TASK_IPDB=True
       shift
       ;;
     --no-pretty-trace)
       export DJANGO_HOME_TASK_PRETTY_TRACE=False
-      POSITIONAL+=("$1")
+      shift
+      ;;
+    --pretty-trace)
+      export DJANGO_HOME_TASK_PRETTY_TRACE=True
       shift
       ;;
     --verbose)
