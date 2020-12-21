@@ -24,7 +24,7 @@ logger.init()
 
 import os
 
-IPDB = eval(os.environ.get('DJANGO_HOME_TASK_IPDB', 'True'))
+IPDB = eval(os.environ.get('DJANGO_HOME_TASK_IPDB', 'False'))
 if IPDB:  # manage.py --no-ipdb sets this to False
     import ipdb
     

@@ -155,7 +155,7 @@ Environment Variables:
 $c0
 DJANGO_HOME_TASK_SECRET_KEY, DJANGO_HOME_TASK_DB_PASS and DJANGO_SETTINGS_MODULE are necessary for app to run
 DJANGO_HOME_TASK_IPDB, DJANGO_HOME_TASK_PRETTY_TRACE, and DJANGO_HOME_TASK_VERBOSE are for debugging purposes,
-and are toggled and exported by optional '--no-ipdb', '--no-pretty-trace' and '--verbose' args.
+and are toggled and exported by optional '--[no-]ipdb', '--[no-]pretty-trace' and '--verbose' args.
 "
       return 0
       ;;
