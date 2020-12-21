@@ -38,6 +38,8 @@ def help():
     
     SUBPATH
         if MODE is 'user', then SUBPATH has to be the username
+            As of writing this, existing usernames are:
+            marktzuk, bill, jeff, john, daniel
         if MODE is 'msg', then SUBPATH has to be the message id
     
     OPTIONS

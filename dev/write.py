@@ -6,16 +6,15 @@ def main(_sender, _receiver, _message, _subject, _localhost: bool, _port):
     import json
     if _localhost:
         _url = f"http://localhost:{_port}/write/"
-        csrftoken = '2Q2QAtNm2YIoaaVW17Pi2lDF3dYai9cfs4eso1O0RNn1gfuziKCRdR8qZ60yP9R6'
+        # csrftoken = '2Q2QAtNm2YIoaaVW17Pi2lDF3dYai9cfs4eso1O0RNn1gfuziKCRdR8qZ60yP9R6'
     else:
         _url = f"https://django-home-task-gb.herokuapp.com/write/"
-        csrftoken = '9IqrE26wnoaEqHSIradW4AGYCfsc1nk0AapP14xtSPcOlZEP0NHuXrNq9NwcptfE'
+        # csrftoken = '9IqrE26wnoaEqHSIradW4AGYCfsc1nk0AapP14xtSPcOlZEP0NHuXrNq9NwcptfE'
     
     headers = {
-        'X-CSRFToken':  csrftoken,
+        # 'X-CSRFToken':  csrftoken,
         'Content-Type': 'application/json',
         # 'Cookie':       f'csrftoken={csrftoken}',
-        
         }
     print('\n', f'{_sender = }', f'{_receiver = }', f'{_message = }', f'{_subject = }', f'{headers = }', sep='\n', end='\n')
     response = requests.request("POST", _url, headers=headers, data=json.dumps({
@@ -36,6 +35,8 @@ def help():
 
     SENDER, RECEIVER
         A username.
+        As of writing this, existing usernames are:
+        marktzuk, bill, jeff, john, daniel
 
     OPTIONS
         --message=MESSAGE       defaults to current date time, e.g. 'Sun Dec 20 22:59:50 2020'

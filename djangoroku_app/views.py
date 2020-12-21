@@ -11,7 +11,7 @@ from django.shortcuts import HttpResponse
 import logger
 from djangoroku_app import models
 from djangoroku_app.error import ReceiverDoesNotExist, SenderDoesNotExist
-from django.views.decorators.csrf import csrf_exempt
+
 log = logger.getLogger()
 
 
@@ -54,7 +54,9 @@ def _bad_read(request):
     error = "\n".join((f"'/read' endpoint must be of either the following forms:",
                        f"/read/user/<username>[/<filter or multifilter>]",
                        f"/read/msg/<msg_id>",
-                       f"Instead, you tried to access '{request.path}'"))
+                       f"Instead, you tried to access '{request.path}'",
+                       "Run './dev/read.py -h' for examples"
+                       ))
     _error(request, error)
     return HttpResponseBadRequest(error.encode(errors='replace'))
 
@@ -68,7 +70,8 @@ def _bad_write(request, extra=None):
                        f"\treceiver: <username>",
                        f"\tmessage: str",
                        f"\tsubject: str",
-                       extra)
+                       extra,
+                       "Run './dev/write.py -h' for examples")
                       )
     _error(request, error)
     return HttpResponseBadRequest(error.encode(errors='replace'))
@@ -77,7 +80,9 @@ def _bad_write(request, extra=None):
 def _bad_delete(request):
     error = "\n".join((f"'/delete' endpoint must be of the following form:",
                        f"/delete/<msg_id>",
-                       f"Instead, you tried to access '{request.path}'"))
+                       f"Instead, you tried to access '{request.path}'",
+                       "Run './dev/delete.py -h' for examples"
+                       ))
     _error(request, error)
     return HttpResponseBadRequest(error.encode(errors='replace'))
 
@@ -231,7 +236,6 @@ def delete(request, *args, **kwargs):
     return delete_msg_by_id(request, kwargs['msg_id'])
 
 
-# @csrf_exempt
 def write(request, *args, **kwargs) -> HttpResponse:
     """Expects an Ajax call, not URL params. Run './dev/write.py -h' for instructions."""
     log.debug(f'write({request = }, {args = }, {kwargs = })')
