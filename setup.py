@@ -26,9 +26,7 @@ setup_args = dict(name='django_home_assignment',
                   # pip install -e .[dev]
                   extras_require={
                       'dev': ['pytest',
-                              # 'ipdb',
-                              # https://stackoverflow.com/a/54794506/11842164
-                              'ipdb @ git+ssh://git@github.com/giladbarnea/ipdb@v0.13.4#egg=ipdb'
+                              'ipdb3'
                               'IPython',
                               'ipython-sql',
                               'ipython_autoimport',

@@ -26,9 +26,9 @@ import os
 
 IPDB = eval(os.environ.get('DJANGO_HOME_TASK_IPDB', 'False'))
 if IPDB:  # manage.py --no-ipdb sets this to False
-    import ipdb
+    import ipdb3
     
-    sys.breakpointhook = ipdb.set_trace
+    sys.breakpointhook = ipdb3.set_trace
 log = logger.getLogger()
 log.debug(f'{IPDB = }')
 urlpatterns = [
