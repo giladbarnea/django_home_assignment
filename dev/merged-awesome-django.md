@@ -42,9 +42,9 @@
 ## Apis
 
 - [dj-rest-auth](https://github.com/jazzband/dj-rest-auth) - Drop-in API endpoints for handling authentication securely in Django Rest Framework. Works especially well with SPAs (e.g React, Vue, Angular), and Mobile applications.
-- [django-cors-headers](https://github.com/ottoyiu/django-cors-headers) - Django app for handling the server headers required for Cross-Origin Resource Sharing (CORS).
+- [django-cors-headers](https://github.com/adamchainz/django-cors-headers) - Django app for handling the server headers required for Cross-Origin Resource Sharing (CORS).
 - [django-ninja](https://django-ninja.rest-framework.com) - Django Ninja - Fast Django REST framework based on type annotations.
-- [django-rest-framework](http://www.django-rest-framework.org) - A powerful and flexible toolkit that makes it easy to build Web APIs.
+- [django-rest-framework](https://github.com/encode/django-rest-framework) - A powerful and flexible toolkit that makes it easy to build Web APIs.
 - [django-rest-framework-simplejwt](https://github.com/davesque/django-rest-framework-simplejwt) - JSON web tokens for DRF.
 - [django-rest-knox](https://github.com/james1345/django-rest-knox) - Authentication Module for django-rest-auth.
 - [django-tastypie](http://tastypieapi.org) - Creating delicious APIs for Django apps since 2010.
@@ -140,7 +140,7 @@
 - [lightweight django](http://shop.oreilly.com/product/0636920032502.do) - (1.7) - Using REST, WebSockets, and Backbone with Django.
 - [mastering django](https://www.amazon.com/mastering-django-nigel-george/dp/0648884414) - 
 - [speed up your django tests](https://adamj.eu/tech/2020/05/04/new-book-speed-up-your-django-tests) - 
-- [tango with django](http://www.tangowithdjango.com) - (1.5)
+- [tango with django](https://www.tangowithdjango.com) - (1.5)
 - [test-driven web development with python](https://web.archive.org/web/20170914220113/http://chimera.labs.oreilly.com/books/1234000000754/index.html) - (1.7)
 - [two scoops of django 3.x: best practices for the django web framework](https://www.feldroy.com/collections/two-scoops-press/products/two-scoops-of-django-3-x) - 
 - [two scoops of django: best practices for django 1.11](https://www.twoscoopspress.com/products/two-scoops-of-django-1-11) - A best practice book for making Python and Django as fun as ice cream.
@@ -252,26 +252,22 @@
 - [sentry](https://github.com/getsentry/sentry) - A modern error logging and aggregation platform.
 
 
-## Document Management
-
-- [mayan-edms](https://github.com/mayan-edms/mayan-edms) - Open source, Django based DMS (document management system) with custom metadata indexing, file serving integration, OCR capabilities, document versioning and electronic signature
-
-
-## Drf Resources
+## Django Rest Framework
 
 - [Drf Resources: official documentation](https://www.django-rest-framework.org) - 
 - [awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework) - 
-- [drf source code](https://github.com/encode/django-rest-framework) - 
-
-
-## Drf Tutorials
-
 - [building apis with django and drf](https://books.agiliq.com/projects/django-api-polls-tutorial/en/latest) - 
 - [drf blog api](https://wsvincent.com/django-rest-framework-tutorial) - 
+- [drf source code](https://github.com/encode/django-rest-framework) - 
 - [drf with react](https://www.valentinog.com/blog/drf) - 
 - [drf with react: todo api](https://wsvincent.com/django-rest-framework-react-tutorial) - 
 - [making react and django play well together](https://fractalideas.com/blog/making-react-and-django-play-well-together) - 
 - [official rest framework - a beginner's guide](https://learndjango.com/tutorials/official-django-rest-framework-tutorial-beginners) - 
+
+
+## Document Management
+
+- [mayan-edms](https://gitlab.com/mayan-edms/mayan-edms) - Open source, Django based DMS (document management system) with custom metadata indexing, file serving integration, OCR capabilities, document versioning and electronic signature
 
 
 ## Ecommerce
@@ -290,7 +286,7 @@
 ## Editors
 
 - [django-business-logic](https://github.com/dgk/django-business-logic) - Visual DSL framework for django.
-- [django-ckeditor](https://github.com/shaunsephton/django-ckeditor) - Django admin CKEditor integration.
+- [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor) - Django admin CKEditor integration.
 - [django-markdown-editor](https://github.com/agusmakmun/django-markdown-editor) - Awesome Django Markdown Editor, supported for Bootstrap & Semantic-UI.
 - [django-markdownx](https://github.com/adi-/django-markdownx) - Comprehensive Markdown plugin built for Django.
 - [django-quill-editor](https://github.com/leehanyeong/django-quill-editor) - django-quill-editor makes Quill.js easy to use on Django Forms and admin sites.
@@ -371,8 +367,8 @@
 - [django-autocomplete-light](https://github.com/yourlabs/django-autocomplete-light) - django-autocomplete-light's purpose is to enable autocompletes quickly and properly in a django project.
 - [django-bootstrap-form](https://github.com/tzangms/django-bootstrap-form) - Twitter Bootstrap for Django Form.
 - [django-bootstrap3](https://github.com/dyve/django-bootstrap3) - Use Bootstrap in your Django templates, the Django way.
-- [django-crispy-forms](https://github.com/maraujop/django-crispy-forms) - The best way to have DRY Django forms. The app provides a tag and filter that lets you quickly render forms in a div format while providing an enormous amount of
-- [django-floppyforms](https://github.com/jazzband/django-floppyforms) - django-floppyforms is an application that gives you full control of the output of forms rendering. The forms API and features are exactly the same as Django’s, the key
+- [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) - The best way to have DRY Django forms. The app provides a tag and filter that lets you quickly render forms in a div format while providing an enormous amount of
+- [django-floppyforms](https://github.com/gregmuellegger/django-floppyforms) - django-floppyforms is an application that gives you full control of the output of forms rendering. The forms API and features are exactly the same as Django’s, the key
 - [django-formtools](https://github.com/jazzband/django-formtools) - For form previous and multi-step forms, previously part of Django until 1.8.
 - [django-shapeshifter](https://github.com/kennethlove/django-shapeshifter) - A CBV to handle multiple forms in one view.
 - [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks) - Tweak form field rendering in templates.
@@ -442,14 +438,14 @@
 - [django-fakery](https://github.com/fcurella/django-fakery) - An easy-to-use implementation of Creation Methods for Django, backed by Faker.
 - [django-lifecycle](https://github.com/rsinger86/django-lifecycle) - Declarative model lifecycle hooks, an alternative to Signals.
 - [django-localflavor](https://github.com/django/django-localflavor) - Country-specific Django helpers, formerly of contrib fame.
-- [django-model-utils](https://github.com/jazzband/django-model-utils) - Django model mixins and utilities.
+- [django-model-utils](https://github.com/carljm/django-model-utils) - Django model mixins and utilities.
 - [django-money](https://github.com/django-money/django-money) - A little Django app that uses py-moneyed to add support for Money fields in your models and forms.
 - [django-mptt](https://github.com/django-mptt/django-mptt) - Utilities for implementing a modified pre-order traversal tree in django.
 - [django-phonenumber-field](https://github.com/stefanfoulis/django-phonenumber-field) - A Django library which interfaces with [python-phonenumbers](https://github.com/daviddrysdale/python-phonenumbers) to validate, pretty print and convert phone
 - [django-polymorphic](https://github.com/django-polymorphic/django-polymorphic) - Django-polymorphic simplifies using inherited models in Django projects.
 - [django-reversion](https://github.com/etianen/django-reversion) - Version control for model instances.
 - [django-simple-history](https://github.com/treyhunner/django-simple-history) - Store model history and view/revert changes from the admin.
-- [django-taggit](https://github.com/alex/django-taggit) - Simple tagging for Django.
+- [django-taggit](https://github.com/jazzband/django-taggit) - Simple tagging for Django.
 - [django-treebeard](https://github.com/django-treebeard/django-treebeard) - Alternative tree data structures for Django. (provides 3 different methods for storing hierarchical data, including MPTT )
 
 
@@ -499,7 +495,7 @@
 - [django-braces](https://github.com/brack3t/django-braces) - Reusable, generic mixins for Django.
 - [django-calendarium](https://github.com/bitlabstudio/django-calendarium) - A reusable app to manage and display a calendar in your templates.
 - [django-cms](https://github.com/divio/django-cms) - The easy-to-use and developer-friendly CMS.
-- [django-cors-headers](https://github.com/ottoyiu/django-cors-headers) - Django app for handling the server headers required for Cross-Origin Resource Sharing (CORS).
+- [django-cors-headers](https://github.com/adamchainz/django-cors-headers) - Django app for handling the server headers required for Cross-Origin Resource Sharing (CORS).
 - [django-dfp](https://github.com/praekelt/django-dfp) - App that provides tags to fetch Google DFP ads.
 - [django-dynamic-scraper](https://github.com/holgerd77/django-dynamic-scraper) - Creating Scrapy scrapers via the Django admin interface.
 - [django-el-pagination](https://github.com/shtalinberg/django-el-pagination) - Django EL(Endless) Pagination can be used to provide Twitter-style or Digg-style pagination, with optional Ajax support.
@@ -531,7 +527,7 @@
 - [django-websocket-redis](https://github.com/jrief/django-websocket-redis) - Websockets for Django applications using Redis as message queue.
 - [drum](https://github.com/stephenmcd/drum) - Reddit / Hacker News clone for Django/Mezzanine.
 - [koalixcrm](https://github.com/tfroehlich82/koalixcrm) - Beautiful CRM/ERP for small business.
-- [mayan-edms](https://github.com/mayan-edms/mayan-edms) - Open source, Django based DMS (document management system) with custom metadata indexing, file serving integration, OCR capabilities, document versioning and electronic signature
+- [mayan-edms](https://gitlab.com/mayan-edms/mayan-edms) - Open source, Django based DMS (document management system) with custom metadata indexing, file serving integration, OCR capabilities, document versioning and electronic signature
 - [metamon](http://tryolabs.github.io/metamon) - Collection of Ansible playbooks to quickly start your Django Application.
 - [micawber](https://github.com/coleifer/micawber) - A small library for extracting rich content from urls.
 - [omnidb](https://github.com/omnidb/omnidb) - Web tool for database management and conversion, built with Django.
@@ -619,7 +615,7 @@
 
 - [django-nap](https://github.com/funkybob/django-nap) - A minimalist approach to object serialization, RESTful views, and RPC views.
 - [django-rest-auth](https://github.com/tivix/django-rest-auth) - This app makes it extremely easy to build Django powered SPA's (Single Page App) or Mobile apps exposing all registration and authentication related functionality as CBV's (Class Base
-- [django-rest-framework](http://www.django-rest-framework.org) - A powerful and flexible toolkit that makes it easy to build Web APIs.
+- [django-rest-framework](https://github.com/encode/django-rest-framework) - A powerful and flexible toolkit that makes it easy to build Web APIs.
 - [django-rest-localflavor](https://github.com/gilsondev/django-rest-localflavor) - Localized flavors of some serializers to use with Django Rest Framework.
 - [django-rest-swagger](https://github.com/marcgibbons/django-rest-swagger) - Swagger Documentation Generator for Django REST Framework.
 - [django-tastypie](http://tastypieapi.org) - Creating delicious APIs for Django apps since 2010.
@@ -691,7 +687,7 @@
 
 ## Tagging
 
-- [django-taggit](https://github.com/alex/django-taggit) - Simple tagging for Django.
+- [django-taggit](https://github.com/jazzband/django-taggit) - Simple tagging for Django.
 - [django-taggit-helpers](https://github.com/mfcovington/django-taggit-helpers) - Django admin helper classes for django-taggit tags.
 
 
@@ -840,7 +836,7 @@
 
 ## Wysiwyg Editors
 
-- [django-ckeditor](https://github.com/shaunsephton/django-ckeditor) - Django admin CKEditor integration.
+- [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor) - Django admin CKEditor integration.
 - [django-redactoreditor](https://github.com/mazelife/django-redactoreditor) - This package helps integrate the Redactor Javascript WYSIWYG-editor in Django.
 - [django-summernote](https://github.com/summernote/django-summernote) - Summernote is a simple WYSIWYG editor. django-summernote allows you to embed Summernote into Django very handy. Support admin mixins and widgets.
 - [django-tinymce](https://github.com/aljosa/django-tinymce) - TinyMCE integration for Django.

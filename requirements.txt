@@ -5,6 +5,8 @@ psycopg2-binary==2.8.6
 psycopg2==2.8.6
 rich
 requests
-# for debugging purposes:
+# for debugging:
 IPython
 ipdb3
+werkzeug
+django-extensions
