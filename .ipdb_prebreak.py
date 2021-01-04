@@ -12,8 +12,8 @@ from rich.console import Console
 import pyinspect as pi
 
 con = Console()
-if sys.exc_info():
-    print(f'prebreak: building fancy trace... ({sys.exc_info() = })')
+if sys.exc_info()[0]:
+    print(f'prebreak: building fancy trace... ({sys.exc_info()[0] = })')
     con.print_exception(show_locals=True)
 
 
@@ -22,15 +22,15 @@ def mm(topic, subtopic=''):
 
 
 def what(*args, **kwargs):
-    inspect(*args, **kwargs, methods=True, help=True)
+    inspect(*args, **kwargs, methods=True, help=True, value=True)
 
 
 def what_(*args, **kwargs):
-    inspect(*args, **kwargs, methods=True, help=True, private=True)
+    inspect(*args, **kwargs, methods=True, help=True, private=True, value=True)
 
 
 def what__(*args, **kwargs):
-    inspect(*args, **kwargs, methods=True, help=True, private=True, dunder=True)
+    inspect(*args, **kwargs, methods=True, help=True, private=True, dunder=True, value=True)
 
 
 builtins.sys = sys
@@ -42,4 +42,4 @@ builtins.start_ipy = start_ipython
 builtins.get_ipy = get_ipython
 builtins.ppr = ppr
 builtins.con = con
-builtins.pi=pi
+builtins.pi = pi
