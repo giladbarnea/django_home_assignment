@@ -47,7 +47,7 @@
 - [django-rest-framework](https://github.com/encode/django-rest-framework) - A powerful and flexible toolkit that makes it easy to build Web APIs.
 - [django-rest-framework-simplejwt](https://github.com/davesque/django-rest-framework-simplejwt) - JSON web tokens for DRF.
 - [django-rest-knox](https://github.com/james1345/django-rest-knox) - Authentication Module for django-rest-auth.
-- [django-tastypie](http://tastypieapi.org) - Creating delicious APIs for Django apps since 2010.
+- [django-tastypie](https://github.com/django-tastypie/django-tastypie) - Creating delicious APIs for Django apps since 2010.
 - [django-webpack-loader](https://github.com/owais/django-webpack-loader) - Transparent webpack integration for django.
 - [djaq](https://github.com/paul-wolf/djaq) - An instant remote API to Django models with a powerful query language.
 - [djoser](https://github.com/sunscrapers/djoser) - REST implementation of Django authentication system.
@@ -140,7 +140,7 @@
 - [lightweight django](http://shop.oreilly.com/product/0636920032502.do) - (1.7) - Using REST, WebSockets, and Backbone with Django.
 - [mastering django](https://www.amazon.com/mastering-django-nigel-george/dp/0648884414) - 
 - [speed up your django tests](https://adamj.eu/tech/2020/05/04/new-book-speed-up-your-django-tests) - 
-- [tango with django](https://www.tangowithdjango.com) - (1.5)
+- [tango with django](http://www.tangowithdjango.com) - (1.5)
 - [test-driven web development with python](https://web.archive.org/web/20170914220113/http://chimera.labs.oreilly.com/books/1234000000754/index.html) - (1.7)
 - [two scoops of django 3.x: best practices for the django web framework](https://www.feldroy.com/collections/two-scoops-press/products/two-scoops-of-django-3-x) - 
 - [two scoops of django: best practices for django 1.11](https://www.twoscoopspress.com/products/two-scoops-of-django-1-11) - A best practice book for making Python and Django as fun as ice cream.
@@ -201,7 +201,7 @@
 - [django village](http://djangovillage.it) - the Italian Django community conference. An opportunity to meet djangonauts from all over Italy and abroad.
 - [django weekend](https://twitter.com/djangoweekend) - is a Django/Python non-profit community event, organised and run entirely by volunteers. The conference is Django-focused, but all aspects of Python fall within its remit.
 - [django: under the hood](https://www.djangounderthehood.com) - is an exciting new Django conference for experienced Django developers. Come and learn about the internals of Django, and help to shape its future.
-- [djangocon europe](https://2020.djangocon.eu) - is the annual largest European-based Django conference that is usually held in late spring.
+- [djangocon europe](http://www.djangocon.eu) - is the annual largest European-based Django conference that is usually held in late spring.
 - [djangocon us](https://2016.djangocon.us) - is the largest North American Django conference generally held the first week in September each year.
 - [euro python](https://ep2019.europython.eu) - ([YouTube Channel](https://www.youtube.com/user/PythonItalia))
 - [pycon australia](https://2019.pycon-au.org) - ([YouTube Channel](https://www.youtube.com/user/PyConAU))
@@ -243,18 +243,42 @@
 
 ## Debugging
 
-- [django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar) - A configurable set of panels that display various debug information about the current request/response.
+- [behave-django](https://github.com/behave/behave-django) - Behave BDD integration for Django.
+- [django-behave](https://github.com/django-behave/django-behave) - TestRunner for the Behave BDD module.
+- [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar) - A configurable set of panels that display various debug information about the current request/response.
 - [django-devserver](https://github.com/dcramer/django-devserver) - A drop in replacement for Django's built-in runserver command.
+- [django-dynamic-fixture](https://github.com/paulocheque/django-dynamic-fixture) - A complete library to create dynamic model instances for testing purposes.
+- [django-eraserhead](https://github.com/dizballanze/django-eraserhead) - Django package that provides hints to optimize database usage by deferring unused fields (and more).
+- [django-faker](https://github.com/joke2k/django-faker) - Fake-factory to generate test data.
+- [django-google-optimize](https://github.com/adinhodovic/django-google-optimize) - Django application designed to make running server side Google Optimize A/B tests easy.
+- [django-jenkins](https://github.com/kmmbvnr/django-jenkins) - Plug and play continuous integration with django and jenkins.
+- [django-nose](https://github.com/django-nose/django-nose) - Test runner using nose.
 - [django-querycount](https://github.com/bradmontgomery/django-querycount) - Middleware that Prints the number of DB queries to the runserver console.
+- [django-selenium](https://github.com/dragoon/django-selenium) - Selenium testing support.
+- [django-shotgun](https://github.com/stephenmcd/django-shotgun) - Test entire Django sites.
 - [django-silk](https://github.com/jazzband/django-silk) - Silky smooth profiling for Django.
+- [django-slowtests](https://github.com/realpython/django-slow-tests) - Locate your slowest tests.
+- [django-swagger-tester](https://github.com/sondrelg/django-swagger-tester) - Django test utility for validating Swagger documentation.
+- [django-test-migrations](https://github.com/wemake-services/django-test-migrations) - Test Django schema and data migrations, including migrations' order.
+- [django-test-plus](https://github.com/revsys/django-test-plus) - Useful addons to Django's default TestCase that greatly reduces boilerplate code.
+- [django-waffle](https://github.com/django-waffle/django-waffle) - A feature flipper for Django.
 - [django-web-profiler](https://github.com/micropyramid/django-web-profiler) - A django profiling tool which logs, stores debug toolbar statistics and also a set of URL's statistics using a management command.
+- [factory_boy](https://github.com/factoryboy/factory_boy) - A test fixtures replacement for Python
+- [hitchtest](http://hitchtest.com) - High level integration testing framework for Django.
+- [lettuce-django-terrain](https://github.com/stringfellow/lettuce-django-terrain) - Terrain file for lettuce in django projects.
+- [mixer](https://github.com/klen/mixer) - An application to generate instances of Django or SQLAlchemy models. Fast and convenient test-data generation.
+- [mock-django](https://github.com/dcramer/mock-django) - A simple library for mocking certain Django behavior, such as the ORM.
+- [model-bakery](https://github.com/model-bakers/model_bakery) - Smart way to create fixtures for testing in Django
+- [model-mommy](https://github.com/vandersonmota/model_mommy) - Smart fixtures for better tests.
 - [nplusone](https://github.com/jmcarp/nplusone) - Auto-detecting the n+1 queries problem in Django. (and other ORMs)
+- [pytest-django](https://pypi.python.org/pypi/pytest-django) - Test runner using py.test.
 - [sentry](https://github.com/getsentry/sentry) - A modern error logging and aggregation platform.
+- [splinter](https://github.com/cobrateam/splinter) - Test framework for web applications.
 
 
 ## Django Rest Framework
 
-- [Drf Resources: official documentation](https://www.django-rest-framework.org) - 
+- [Django Rest Framework: official documentation](https://www.django-rest-framework.org) - 
 - [awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework) - 
 - [building apis with django and drf](https://books.agiliq.com/projects/django-api-polls-tutorial/en/latest) - 
 - [drf blog api](https://wsvincent.com/django-rest-framework-tutorial) - 
@@ -275,9 +299,9 @@
 - [cartridge](https://github.com/stephenmcd/cartridge) - Ecommerce for Django/Mezzanine.
 - [django-changuito](https://github.com/angvp/django-changuito) - A cart app for your django site, an updated fork of django-cart.
 - [django-oscar](https://github.com/django-oscar/django-oscar) - Domain-driven e-commerce for Django.
-- [django-shop](https://github.com/awesto/django-shop) - A Django based shop system.
+- [django-shop](http://www.django-shop.org) - A Django based shop system.
 - [lighting fas shop](http://www.getlfs.com) - Lighting Fas Shop is Ecommerce made with Django.
-- [saleor](http://getsaleor.com) - An e-commerce storefront for Python and Django.
+- [saleor](https://github.com/mirumee/saleor) - An e-commerce storefront for Python and Django.
 - [satchless](http://satchless.com) - Satchless brings e-commerce and Python together.
 - [satchmo](https://bitbucket.org/chris1610/satchmo/src) - Satchmo is an eCommerce framework created in Django which allows you to develop unique and robust online stores.
 - [shuup](https://github.com/shuup/shuup) - Django E-Commerce Platform.
@@ -286,7 +310,7 @@
 ## Editors
 
 - [django-business-logic](https://github.com/dgk/django-business-logic) - Visual DSL framework for django.
-- [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor) - Django admin CKEditor integration.
+- [django-ckeditor](https://github.com/shaunsephton/django-ckeditor) - Django admin CKEditor integration.
 - [django-markdown-editor](https://github.com/agusmakmun/django-markdown-editor) - Awesome Django Markdown Editor, supported for Bootstrap & Semantic-UI.
 - [django-markdownx](https://github.com/adi-/django-markdownx) - Comprehensive Markdown plugin built for Django.
 - [django-quill-editor](https://github.com/leehanyeong/django-quill-editor) - django-quill-editor makes Quill.js easy to use on Django Forms and admin sites.
@@ -297,7 +321,7 @@
 ## Educational
 
 - [adam johnson](https://adamj.eu/tech) - Adam is on the Technical Board of Django and writes regular tutorials.
-- [classy class-based views](https://ccbv.co.uk) - Detailed descriptions, with full methods and attributes, for each of Django's class-based generic views.
+- [classy class-based views](http://ccbv.co.uk) - Detailed descriptions, with full methods and attributes, for each of Django's class-based generic views.
 - [classy django forms](https://github.com/ana-balica/classy-django-forms) - Detailed descriptions of methods/properties/attributes for each form class.
 - [classy django rest framework](http://www.cdrf.co) - Detailed descriptions, with full methods and attributes, for each of Django REST Framework's class-based views and serializers.
 - [django girls tutorial](https://tutorial.djangogirls.org/en) - A fun and engaging tutorial showing how to build a blog using Django and deploy it to Heroku.
@@ -332,7 +356,7 @@
 
 ## External Documentation
 
-- [classy class-based views](https://ccbv.co.uk) - Detailed descriptions, with full methods and attributes, for each of Django's class-based generic views.
+- [classy class-based views](http://ccbv.co.uk) - Detailed descriptions, with full methods and attributes, for each of Django's class-based generic views.
 - [classy django rest framework](http://www.cdrf.co) - Detailed descriptions, with full methods and attributes, for each of Django REST Framework's class-based views and serializers.
 
 
@@ -367,7 +391,7 @@
 - [django-autocomplete-light](https://github.com/yourlabs/django-autocomplete-light) - django-autocomplete-light's purpose is to enable autocompletes quickly and properly in a django project.
 - [django-bootstrap-form](https://github.com/tzangms/django-bootstrap-form) - Twitter Bootstrap for Django Form.
 - [django-bootstrap3](https://github.com/dyve/django-bootstrap3) - Use Bootstrap in your Django templates, the Django way.
-- [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) - The best way to have DRY Django forms. The app provides a tag and filter that lets you quickly render forms in a div format while providing an enormous amount of
+- [django-crispy-forms](https://github.com/maraujop/django-crispy-forms) - The best way to have DRY Django forms. The app provides a tag and filter that lets you quickly render forms in a div format while providing an enormous amount of
 - [django-floppyforms](https://github.com/gregmuellegger/django-floppyforms) - django-floppyforms is an application that gives you full control of the output of forms rendering. The forms API and features are exactly the same as Django’s, the key
 - [django-formtools](https://github.com/jazzband/django-formtools) - For form previous and multi-step forms, previously part of Django until 1.8.
 - [django-shapeshifter](https://github.com/kennethlove/django-shapeshifter) - A CBV to handle multiple forms in one view.
@@ -445,7 +469,7 @@
 - [django-polymorphic](https://github.com/django-polymorphic/django-polymorphic) - Django-polymorphic simplifies using inherited models in Django projects.
 - [django-reversion](https://github.com/etianen/django-reversion) - Version control for model instances.
 - [django-simple-history](https://github.com/treyhunner/django-simple-history) - Store model history and view/revert changes from the admin.
-- [django-taggit](https://github.com/jazzband/django-taggit) - Simple tagging for Django.
+- [django-taggit](https://github.com/alex/django-taggit) - Simple tagging for Django.
 - [django-treebeard](https://github.com/django-treebeard/django-treebeard) - Alternative tree data structures for Django. (provides 3 different methods for storing hierarchical data, including MPTT )
 
 
@@ -488,28 +512,20 @@
 - [Other: django packages](https://github.com/djangopackages/djangopackages) - Django Packages is a directory of reusable apps, sites, tools, and more for your Django projects.
 - [django-activeurl](https://github.com/hellysmile/django-activeurl) - Easy to use active URL highlighting for django.
 - [django-activity-stream](https://github.com/justquick/django-activity-stream) - Generate generic activity streams from the actions on your site. Users can follow any actors' activities for personalized streams.
-- [django-admin-env-notice](https://github.com/dizballanze/django-admin-env-notice) - Visually distinguish environments in Django Admin.
 - [django-adminactions](https://github.com/saxix/django-adminactions) - Collection of useful actions to use with django.contrib.admin.ModelAdmin and/or django.contrib.admin.AdminSite.
-- [django-allauth](https://github.com/pennersr/django-allauth) - Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication.
 - [django-autoadmin](https://github.com/rosarior/django-autoadmin) - Automatic admin users for Django projects.
-- [django-braces](https://github.com/brack3t/django-braces) - Reusable, generic mixins for Django.
 - [django-calendarium](https://github.com/bitlabstudio/django-calendarium) - A reusable app to manage and display a calendar in your templates.
-- [django-cms](https://github.com/divio/django-cms) - The easy-to-use and developer-friendly CMS.
-- [django-cors-headers](https://github.com/adamchainz/django-cors-headers) - Django app for handling the server headers required for Cross-Origin Resource Sharing (CORS).
 - [django-dfp](https://github.com/praekelt/django-dfp) - App that provides tags to fetch Google DFP ads.
 - [django-dynamic-scraper](https://github.com/holgerd77/django-dynamic-scraper) - Creating Scrapy scrapers via the Django admin interface.
 - [django-el-pagination](https://github.com/shtalinberg/django-el-pagination) - Django EL(Endless) Pagination can be used to provide Twitter-style or Digg-style pagination, with optional Ajax support.
-- [django-extensions](https://github.com/django-extensions/django-extensions) - This is a repository for collecting global custom management extensions for the Django Framework.
-- [django-filter](https://github.com/carltongibson/django-filter) - A generic system for filtering Django QuerySets based on user selections.
 - [django-friendship](https://github.com/revsys/django-friendship) - Django app to manage following and bi-directional friendships.
 - [django-gravatar2](https://github.com/twaddington/django-gravatar) - Essential Gravatar support for Django. Features helper methods, templatetags and a full test suite!
 - [django-hackathon-starter](https://github.com/drksephy/django-hackathon-starter) - A boilerplate for Django web applications, containing various social authentication methods and several popular API examples.
 - [django-ipware](https://github.com/un33k/django-ipware) - A Django application to retrieve user's IP address.
 - [django-macros-url](https://github.com/phpdude/django-macros-url) - Django Macros URL. Routing must be simple as possible.
 - [django-magic-embed](https://github.com/kronoscode/django-magicembed) - an easy and simple Django template tag and tool to embed video and get thumbnails from video providers.
-- [django-markitup](https://bitbucket.org/carljm/django-markitup/src) - A Django reusable application for end-to-end markup handling.
+- [django-markitup](https://github.com/zsiciarz/django-markitup) - A Django reusable application for end-to-end markup handling.
 - [django-mmc](https://github.com/lpgenerator/django-mmc) - App for monitoring management commands on Django..
-- [django-mptt](https://github.com/django-mptt/django-mptt) - Utilities for implementing a modified pre-order traversal tree in django.
 - [django-overextends](https://github.com/stephenmcd/django-overextends) - Circular template inheritance for Django.
 - [django-pagination](https://github.com/ericflo/django-pagination) - https://github.com/ericflo/django-pagination.
 - [django-qa](https://github.com/swappsco/django-qa) - A simple Q&A App.
@@ -520,20 +536,15 @@
 - [django-simple-pagination](https://github.com/micropyramid/django-simple-pagination) - A Simple Django app for digg-style pagination with little effort.
 - [django-smuggler](https://github.com/semente/django-smuggler) - Django Smuggler is a pluggable application for Django Web Framework that helps you to import/export fixtures via the automatically-generated administration interface.
 - [django-solo](https://github.com/lazybird/django-solo) - Helps working with singletons - things like global settings that you want to edit from the admin site.
-- [django-sql-explorer](https://github.com/groveco/django-sql-explorer) - Easily share data via SQL queries, right from Django.
 - [django-stored-messages](https://github.com/evonove/django-stored-messages) - Store Django messages on your project's backend.
 - [django-uuslug](https://github.com/un33k/django-uuslug) - a slugify application that guarantees Uniqueness and handles Unicode.
 - [django-watchman](https://github.com/mwarkentin/django-watchman) - django-watchman exposes a status endpoint for your backing services like databases, caches, etc.
 - [django-websocket-redis](https://github.com/jrief/django-websocket-redis) - Websockets for Django applications using Redis as message queue.
 - [drum](https://github.com/stephenmcd/drum) - Reddit / Hacker News clone for Django/Mezzanine.
 - [koalixcrm](https://github.com/tfroehlich82/koalixcrm) - Beautiful CRM/ERP for small business.
-- [mayan-edms](https://gitlab.com/mayan-edms/mayan-edms) - Open source, Django based DMS (document management system) with custom metadata indexing, file serving integration, OCR capabilities, document versioning and electronic signature
 - [metamon](http://tryolabs.github.io/metamon) - Collection of Ansible playbooks to quickly start your Django Application.
 - [micawber](https://github.com/coleifer/micawber) - A small library for extracting rich content from urls.
 - [omnidb](https://github.com/omnidb/omnidb) - Web tool for database management and conversion, built with Django.
-- [satchmo](https://bitbucket.org/chris1610/satchmo/src) - Satchmo is an eCommerce framework created in Django which allows you to develop unique and robust online stores.
-- [sentry](https://github.com/getsentry/sentry) - A modern error logging and aggregation platform.
-- [south](https://bitbucket.org/andrewgodwin/south/src) - Django application to provide schema and data migrations that supports Django up to
 - [towel](https://github.com/matthiask/towel) - a collection of tools which make your life easier if you are building a web application using Django.
 
 
@@ -618,7 +629,7 @@
 - [django-rest-framework](https://github.com/encode/django-rest-framework) - A powerful and flexible toolkit that makes it easy to build Web APIs.
 - [django-rest-localflavor](https://github.com/gilsondev/django-rest-localflavor) - Localized flavors of some serializers to use with Django Rest Framework.
 - [django-rest-swagger](https://github.com/marcgibbons/django-rest-swagger) - Swagger Documentation Generator for Django REST Framework.
-- [django-tastypie](http://tastypieapi.org) - Creating delicious APIs for Django apps since 2010.
+- [django-tastypie](https://github.com/django-tastypie/django-tastypie) - Creating delicious APIs for Django apps since 2010.
 - [djangorestframework-recursive](https://github.com/heywbj/django-rest-framework-recursive) - Recursive Serialization for Django REST framework.
 - [drfdocs](https://github.com/manosim/django-rest-framework-docs) - Document Web APIs made with Django REST Framework.
 - [restless](https://github.com/toastdriven/restless) - A lightweight REST miniframework for Python.
@@ -687,7 +698,7 @@
 
 ## Tagging
 
-- [django-taggit](https://github.com/jazzband/django-taggit) - Simple tagging for Django.
+- [django-taggit](https://github.com/alex/django-taggit) - Simple tagging for Django.
 - [django-taggit-helpers](https://github.com/mfcovington/django-taggit-helpers) - Django admin helper classes for django-taggit tags.
 
 
@@ -701,35 +712,6 @@
 - [django-redis](https://github.com/niwinz/django-redis) - Full featured Redis cache backend for Django.
 - [django-rq](https://github.com/rq/django-rq) - The easiest way to monitor and use [RQ](http://python-rq.org) in your Django projects.
 - [huey](https://github.com/coleifer/huey) - A little multi-threaded task queue for python.
-
-
-## Testing
-
-- [behave-django](https://github.com/behave/behave-django) - Behave BDD integration for Django.
-- [django-behave](https://github.com/django-behave/django-behave) - TestRunner for the Behave BDD module.
-- [django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar) - A configurable set of panels that display various debug information about the current request/response.
-- [django-dynamic-fixture](https://github.com/paulocheque/django-dynamic-fixture) - A complete library to create dynamic model instances for testing purposes.
-- [django-eraserhead](https://github.com/dizballanze/django-eraserhead) - Django package that provides hints to optimize database usage by deferring unused fields (and more).
-- [django-faker](https://github.com/joke2k/django-faker) - Fake-factory to generate test data.
-- [django-google-optimize](https://github.com/adinhodovic/django-google-optimize) - Django application designed to make running server side Google Optimize A/B tests easy.
-- [django-jenkins](https://github.com/kmmbvnr/django-jenkins) - Plug and play continuous integration with django and jenkins.
-- [django-nose](https://github.com/django-nose/django-nose) - Test runner using nose.
-- [django-selenium](https://github.com/dragoon/django-selenium) - Selenium testing support.
-- [django-shotgun](https://github.com/stephenmcd/django-shotgun) - Test entire Django sites.
-- [django-slowtests](https://github.com/realpython/django-slow-tests) - Locate your slowest tests.
-- [django-swagger-tester](https://github.com/sondrelg/django-swagger-tester) - Django test utility for validating Swagger documentation.
-- [django-test-migrations](https://github.com/wemake-services/django-test-migrations) - Test Django schema and data migrations, including migrations' order.
-- [django-test-plus](https://github.com/revsys/django-test-plus) - Useful addons to Django's default TestCase that greatly reduces boilerplate code.
-- [django-waffle](https://github.com/django-waffle/django-waffle) - A feature flipper for Django.
-- [factory_boy](https://github.com/factoryboy/factory_boy) - A test fixtures replacement for Python
-- [hitchtest](http://hitchtest.com) - High level integration testing framework for Django.
-- [lettuce-django-terrain](https://github.com/stringfellow/lettuce-django-terrain) - Terrain file for lettuce in django projects.
-- [mixer](https://github.com/klen/mixer) - An application to generate instances of Django or SQLAlchemy models. Fast and convenient test-data generation.
-- [mock-django](https://github.com/dcramer/mock-django) - A simple library for mocking certain Django behavior, such as the ORM.
-- [model-bakery](https://github.com/model-bakers/model_bakery) - Smart way to create fixtures for testing in Django
-- [model-mommy](https://github.com/vandersonmota/model_mommy) - Smart fixtures for better tests.
-- [pytest-django](https://pypi.python.org/pypi/pytest-django) - Test runner using py.test.
-- [splinter](https://github.com/cobrateam/splinter) - Test framework for web applications.
 
 
 ## Third-Party Packages
@@ -836,7 +818,7 @@
 
 ## Wysiwyg Editors
 
-- [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor) - Django admin CKEditor integration.
+- [django-ckeditor](https://github.com/shaunsephton/django-ckeditor) - Django admin CKEditor integration.
 - [django-redactoreditor](https://github.com/mazelife/django-redactoreditor) - This package helps integrate the Redactor Javascript WYSIWYG-editor in Django.
 - [django-summernote](https://github.com/summernote/django-summernote) - Summernote is a simple WYSIWYG editor. django-summernote allows you to embed Summernote into Django very handy. Support admin mixins and widgets.
 - [django-tinymce](https://github.com/aljosa/django-tinymce) - TinyMCE integration for Django.
