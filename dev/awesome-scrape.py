@@ -1,21 +1,36 @@
 import re
 from collections import defaultdict
-
-from rich import pretty
+import rich
+from rich import console
 from itertools import chain
+import pyinspect as pi
 
 aliases = {
-    'Admin Interface':            'Admin',
+    'Admin Interface':            'Admin/Security',
+    'Admin':                      'Admin/Security',
+    'Security':                   'Admin/Security',
     'Content Management Systems': 'Cms',
     'E-Commerce':                 'Ecommerce',
     'File Transfers':             'Files/Images',
     'Image Handling':             'Files/Images',
-    'Model Extensions':           'Models',
+    'Model Extensions':           'Fields/Models',
+    'Fields':                     'Fields/Models',
+    'Models':                     'Fields/Models',
     'Search Engine Optimisation': 'Seo',
     'Task Queues':                'Task Queue',
     'Drf Resources':              'Django Rest Framework',
     'Drf Tutorials':              'Django Rest Framework',
-    'Testing':                    'Debugging',
+    'Testing':                    'Debugging/Performance',
+    'Debugging':                  'Debugging/Performance',
+    'Performance':                'Debugging/Performance',
+    'General':                    'Other',
+    'Settings':                   'Configuration',
+    'Educational':                'External Documentation',
+    'Websites':                   'External Documentation',
+    'Static Assets':              'Asset Management',
+    'Users':                      'Authentication',
+    'Blog Management':            'Cms',
+    'Wysiwyg Editors':            'Editors',
     
     }
 
@@ -53,6 +68,8 @@ def parse_file(filename) -> dict:
         url = linedict['url'].lower()
         url = url[:-1] if url.endswith('/') else url
         description = linedict['description']
+        if current_title == 'Apis' and ('rest' in name.lower() or 'rest' in url or 'rest' in description.lower()):
+            current_title = 'Django Rest Framework'
         if name in filedict:
             if any(fileurl != url for fileurl in filedict[name]['urls']):
                 # same name, different url. e.g. name='official documentation', urls can be different because under different titles
@@ -73,9 +90,10 @@ def main():
     merged = dict()
     bytitle = defaultdict(list)
     
+    con = console.Console()
     # populate merged
     for key in keys:
-        merged[key] = dict(titles=set(), urls=set(), name='', description='')
+        merged[key] = dict(titles=set(), urls=set(), description='')
         for val in (jbwolfe.get(key), wsvincent.get(key), shahraizali.get(key)):
             if not val:
                 continue
@@ -88,6 +106,11 @@ def main():
         for title in value['titles']:
             if title == 'Other' and len(value['titles']) > 1:
                 continue
+            if title == 'Python Packages' and len(value['titles']) > 1:
+                continue
+            if title == 'Restful Api' and len(value['titles']) > 1:
+                continue
+            
             lib = dict(urls=frozenset(merged[key]['urls']), description=merged[key]['description'], name=key)
             normalized_title = aliases.get(title) or title
             existing_lib = next((otherlib for otherlib in bytitle[normalized_title] if have_same_name(otherlib, lib) or have_common_url(otherlib, lib)), None)
@@ -95,7 +118,14 @@ def main():
                 print(f"\nskipping duplicate lib under {normalized_title}:\n\tlib:\n\t\t{lib}\n\texisting:\n\t\t{existing_lib}")
             else:
                 bytitle[normalized_title].append(lib)
-    
+    for title, libs in bytitle.items():
+        for l1 in libs:
+            duplicates = list(otherlib for otherlib in chain(*bytitle.values()) if have_same_name(otherlib, l1) or have_common_url(otherlib, l1))
+            if len(duplicates) > 1:
+                print('\nduplicates:')
+                titles = [key for key in bytitle.keys() if any(duplicate in bytitle[key] for duplicate in duplicates)]
+                con.print(titles, duplicates, width=1000, no_wrap=False, crop=False, soft_wrap=False)
+                # pretty.pprint(f"duplicates: {duplicates}")
     
     bytitle_str = ""
     for title, libs in sorted(bytitle.items()):
