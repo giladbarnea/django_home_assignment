@@ -76,7 +76,6 @@
 
 ## Authentication
 
-- [dj-rest-auth](https://github.com/jazzband/dj-rest-auth) - Drop-in API endpoints for handling authentication securely in Django Rest Framework. Works especially well with SPAs (e.g React, Vue, Angular), and Mobile applications.
 - [django-allauth](https://github.com/pennersr/django-allauth) - Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication.
 - [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng) - Django-cas-ng is Django CAS (Central Authentication Service) 1.0/2.0/3.0 client library to support SSO (Single Sign On) and Single Logout (SLO).
 - [django-organizations](https://github.com/bennylope/django-organizations) - Multi-user accounts for Django projects.
@@ -134,7 +133,7 @@
 - [lightweight django](http://shop.oreilly.com/product/0636920032502.do) - (1.7) - Using REST, WebSockets, and Backbone with Django.
 - [mastering django](https://www.amazon.com/mastering-django-nigel-george/dp/0648884414) - 
 - [speed up your django tests](https://adamj.eu/tech/2020/05/04/new-book-speed-up-your-django-tests) - 
-- [tango with django](http://www.tangowithdjango.com) - (1.5)
+- [tango with django](https://www.tangowithdjango.com) - (1.5)
 - [test-driven web development with python](https://web.archive.org/web/20170914220113/http://chimera.labs.oreilly.com/books/1234000000754/index.html) - (1.7)
 - [two scoops of django 3.x: best practices for the django web framework](https://www.feldroy.com/collections/two-scoops-press/products/two-scoops-of-django-3-x) - 
 - [two scoops of django: best practices for django 1.11](https://www.twoscoopspress.com/products/two-scoops-of-django-1-11) - A best practice book for making Python and Django as fun as ice cream.
@@ -226,11 +225,6 @@
 - [django-dashing](https://github.com/talpor/django-dashing) - a customisable, modular dashboard application framework for Django to visualize interesting data about your project. Inspired in the exceptionally handsome dashboard framework Dashing.
 
 
-## Data Sciences
-
-- [rest-pandas](https://github.com/wq/django-rest-pandas) - Serves up your Pandas dataframes via the Django REST Framework for use in client-side (i.e. d3.js) visualizations and offline analysis (e.g. Excel).
-
-
 ## Database
 
 - [dj-database-url](https://github.com/kennethreitz/dj-database-url) - Use Database URLs in your Django Application.
@@ -263,7 +257,7 @@
 - [django-test-plus](https://github.com/revsys/django-test-plus) - Useful addons to Django's default TestCase that greatly reduces boilerplate code.
 - [django-waffle](https://github.com/django-waffle/django-waffle) - A feature flipper for Django.
 - [django-web-profiler](https://github.com/micropyramid/django-web-profiler) - A django profiling tool which logs, stores debug toolbar statistics and also a set of URL's statistics using a management command.
-- [factory-boy](https://github.com/factoryboy/factory_boy) - Test fixtures replacement.
+- [factory_boy](https://github.com/factoryboy/factory_boy) - A test fixtures replacement for Python
 - [hitchtest](http://hitchtest.com) - High level integration testing framework for Django.
 - [lettuce-django-terrain](https://github.com/stringfellow/lettuce-django-terrain) - Terrain file for lettuce in django projects.
 - [mixer](https://github.com/klen/mixer) - An application to generate instances of Django or SQLAlchemy models. Fast and convenient test-data generation.
@@ -282,15 +276,27 @@
 ## Django Rest Framework
 
 - [Django Rest Framework: official documentation](https://www.django-rest-framework.org) - 
+- [adam johnson](https://adamj.eu/tech) - Adam is on the Technical Board of Django and writes regular tutorials.
 - [awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework) - 
 - [building apis with django and drf](https://books.agiliq.com/projects/django-api-polls-tutorial/en/latest) - 
+- [classy class-based views](https://ccbv.co.uk) - Detailed descriptions, with full methods and attributes, for each of Django's class-based generic views.
+- [classy django forms](https://github.com/ana-balica/classy-django-forms) - Detailed descriptions of methods/properties/attributes for each form class.
+- [classy django rest framework](http://www.cdrf.co) - Detailed descriptions, with full methods and attributes, for each of Django REST Framework's class-based views and serializers.
 - [dj-rest-auth](https://github.com/jazzband/dj-rest-auth) - Drop-in API endpoints for handling authentication securely in Django Rest Framework. Works especially well with SPAs (e.g React, Vue, Angular), and Mobile applications.
+- [django sites](https://www.djangosites.org) - Django Sites is a showcase of websites powered by Django.
+- [django styleguide](https://github.com/hacksoftware/django-styleguide) - Styleguide for Django with best practices and examples.
+- [django template tags and filters](https://www.djangotemplatetagsandfilters.com) - Additional docs on Django's 57 built-in template filters and 27 template tags.
 - [django-cors-headers](https://github.com/ottoyiu/django-cors-headers) - Django app for handling the server headers required for Cross-Origin Resource Sharing (CORS).
 - [django-ninja](https://django-ninja.rest-framework.com) - Django Ninja - Fast Django REST framework based on type annotations.
 - [django-rest-framework-simplejwt](https://github.com/davesque/django-rest-framework-simplejwt) - JSON web tokens for DRF.
 - [django-rest-knox](https://github.com/james1345/django-rest-knox) - Authentication Module for django-rest-auth.
-- [django-tastypie](http://tastypieapi.org) - Creating delicious APIs for Django apps since 2010.
+- [django-rest-localflavor](https://github.com/gilsondev/django-rest-localflavor) - Localized flavors of some serializers to use with Django Rest Framework.
+- [django-rest-swagger](https://github.com/marcgibbons/django-rest-swagger) - Swagger Documentation Generator for Django REST Framework.
+- [django-spillway](https://github.com/bkg/django-spillway) - Geodata extensions for Django REST Framework.
+- [django-tastypie](https://github.com/django-tastypie/django-tastypie) - Creating delicious APIs for Django apps since 2010.
 - [django-webpack-loader](https://github.com/owais/django-webpack-loader) - Transparent webpack integration for django.
+- [djangorestframework-gis](https://github.com/djangonauts/django-rest-framework-gis) - Geographic add-ons for Django Rest Framework.
+- [djangorestframework-recursive](https://github.com/heywbj/django-rest-framework-recursive) - Recursive Serialization for Django REST framework.
 - [djaq](https://github.com/paul-wolf/djaq) - An instant remote API to Django models with a powerful query language.
 - [djoser](https://github.com/sunscrapers/djoser) - REST implementation of Django authentication system.
 - [drf blog api](https://wsvincent.com/django-rest-framework-tutorial) - 
@@ -298,9 +304,19 @@
 - [drf with react](https://www.valentinog.com/blog/drf) - 
 - [drf with react: todo api](https://wsvincent.com/django-rest-framework-react-tutorial) - 
 - [drf-yasg](https://github.com/axnsan12/drf-yasg) - Automated generation of real Swagger/OpenAPI 2.0 schemas from Django REST Framework code.
+- [drfdocs](https://github.com/manosim/django-rest-framework-docs) - Document Web APIs made with Django REST Framework.
+- [full stack python's django page](https://www.fullstackpython.com/django.html) - contains explanations for Django's philosophy and its components along with links to other resources and tutorials.
 - [graphene-django](https://github.com/graphql-python/graphene-django) - GraphQL for Django.
+- [learndjango](https://learndjango.com) - Tutorials and premium courses on Django and Django REST Framework.
 - [making react and django play well together](https://fractalideas.com/blog/making-react-and-django-play-well-together) - 
+- [matt layman](https://www.mattlayman.com) - Regular tutorials and deep-dives on Django topics.
+- [mozilla tutorial](https://developer.mozilla.org/en-us/docs/learn/server-side/django) - Tutorial that shows how to set up a development environment, and how to get started with using it to create your own web applications.
 - [official rest framework - a beginner's guide](https://learndjango.com/tutorials/official-django-rest-framework-tutorial-beginners) - 
+- [realpython](https://realpython.com/tutorials/django) - Many high-quality tutorials on Django.
+- [rest-pandas](https://github.com/wq/django-rest-pandas) - Serves up your Pandas dataframes via the Django REST Framework for use in client-side (i.e. d3.js) visualizations and offline analysis (e.g. Excel).
+- [restless](https://github.com/toastdriven/restless) - A lightweight REST miniframework for Python.
+- [simple is better than complex](https://simpleisbetterthancomplex.com) - A blog about Django, Python and Web Development. Weekly updates containing tutorials, tips, featured packages, reference guides and code snippets.
+- [testdriven](https://testdriven.io/blog) - Multiple Django-specific tutorials on topics like Docker, payments, and more.
 
 
 ## Document Management
@@ -313,9 +329,9 @@
 - [cartridge](https://github.com/stephenmcd/cartridge) - Ecommerce for Django/Mezzanine.
 - [django-changuito](https://github.com/angvp/django-changuito) - A cart app for your django site, an updated fork of django-cart.
 - [django-oscar](https://github.com/django-oscar/django-oscar) - Domain-driven e-commerce for Django.
-- [django-shop](http://www.django-shop.org) - A Django based shop system.
+- [django-shop](https://github.com/awesto/django-shop) - A Django based shop system.
 - [lighting fas shop](http://www.getlfs.com) - Lighting Fas Shop is Ecommerce made with Django.
-- [saleor](http://getsaleor.com) - An e-commerce storefront for Python and Django.
+- [saleor](https://github.com/mirumee/saleor) - An e-commerce storefront for Python and Django.
 - [satchless](http://satchless.com) - Satchless brings e-commerce and Python together.
 - [satchmo](https://bitbucket.org/chris1610/satchmo/src) - Satchmo is an eCommerce framework created in Django which allows you to develop unique and robust online stores.
 - [shuup](https://github.com/shuup/shuup) - Django E-Commerce Platform.
@@ -324,7 +340,7 @@
 ## Editors
 
 - [django-business-logic](https://github.com/dgk/django-business-logic) - Visual DSL framework for django.
-- [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor) - Django admin CKEditor integration.
+- [django-ckeditor](https://github.com/shaunsephton/django-ckeditor) - Django admin CKEditor integration.
 - [django-markdown-editor](https://github.com/agusmakmun/django-markdown-editor) - Awesome Django Markdown Editor, supported for Bootstrap & Semantic-UI.
 - [django-markdownx](https://github.com/adi-/django-markdownx) - Comprehensive Markdown plugin built for Django.
 - [django-quill-editor](https://github.com/leehanyeong/django-quill-editor) - django-quill-editor makes Quill.js easy to use on Django Forms and admin sites.
@@ -355,23 +371,14 @@
 ## External Documentation
 
 - [External Documentation : django packages](https://djangopackages.org) - Django Packages is a directory of reusable apps, sites, tools, and more for your Django projects.
-- [adam johnson](https://adamj.eu/tech) - Adam is on the Technical Board of Django and writes regular tutorials.
-- [classy class-based views](http://ccbv.co.uk) - Detailed descriptions, with full methods and attributes, for each of Django's class-based generic views.
-- [classy django forms](https://github.com/ana-balica/classy-django-forms) - Detailed descriptions of methods/properties/attributes for each form class.
-- [classy django rest framework](http://www.cdrf.co) - Detailed descriptions, with full methods and attributes, for each of Django REST Framework's class-based views and serializers.
-- [django girls tutorial](https://tutorial.djangogirls.org/en) - A fun and engaging tutorial showing how to build a blog using Django and deploy it to Heroku.
+- [classy class-based views](https://ccbv.co.uk) - Detailed descriptions, with full methods and attributes, for each of Django's class-based generic views.
+- [django girls tutorial](https://tutorial.djangogirls.org) - A fun and engaging tutorial showing how to build a blog using Django and deploy it to Heroku.
 - [django introduction](http://www.django-introduction.com) - A reusable set of slides to educate more people about Django.
 - [django sites](https://www.djangosites.org) - Django Sites is a showcase of websites powered by Django.
-- [django styleguide](https://github.com/hacksoftware/django-styleguide) - Styleguide for Django with best practices and examples.
-- [django template tags and filters](https://www.djangotemplatetagsandfilters.com) - Additional docs on Django's 57 built-in template filters and 27 template tags.
 - [full stack python's django page](https://www.fullstackpython.com/django.html) - contains explanations for Django's philosophy and its components along with links to other resources and tutorials.
-- [learndjango](https://learndjango.com) - Tutorials and premium courses on Django and Django REST Framework.
 - [marina mele's site](http://www.marinamele.com) - A blog about Django and Python. Includes deployment to Heroku, a Django project boilerplate for best practices, testing and more.
-- [matt layman](https://www.mattlayman.com) - Regular tutorials and deep-dives on Django topics.
 - [mozilla tutorial](https://developer.mozilla.org/en-us/docs/learn/server-side/django) - Tutorial that shows how to set up a development environment, and how to get started with using it to create your own web applications.
-- [realpython](https://realpython.com/tutorials/django) - Many high-quality tutorials on Django.
 - [simple is better than complex](https://simpleisbetterthancomplex.com) - A blog about Django, Python and Web Development. Weekly updates containing tutorials, tips, featured packages, reference guides and code snippets.
-- [testdriven](https://testdriven.io/blog) - Multiple Django-specific tutorials on topics like Docker, payments, and more.
 
 
 ## Fields/Models
@@ -417,7 +424,7 @@
 - [django-bootstrap-form](https://github.com/tzangms/django-bootstrap-form) - Twitter Bootstrap for Django Form.
 - [django-bootstrap3](https://github.com/dyve/django-bootstrap3) - Use Bootstrap in your Django templates, the Django way.
 - [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) - The best way to have DRY Django forms. The app provides a tag and filter that lets you quickly render forms in a div format while providing an enormous amount of
-- [django-floppyforms](https://github.com/gregmuellegger/django-floppyforms) - django-floppyforms is an application that gives you full control of the output of forms rendering. The forms API and features are exactly the same as Django’s, the key
+- [django-floppyforms](https://github.com/jazzband/django-floppyforms) - django-floppyforms is an application that gives you full control of the output of forms rendering. The forms API and features are exactly the same as Django’s, the key
 - [django-formtools](https://github.com/jazzband/django-formtools) - For form previous and multi-step forms, previously part of Django until 1.8.
 - [django-shapeshifter](https://github.com/kennethlove/django-shapeshifter) - A CBV to handle multiple forms in one view.
 - [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks) - Tweak form field rendering in templates.
@@ -427,8 +434,6 @@
 
 - [django-geoposition](https://github.com/philippbosch/django-geoposition) - A model field that can hold a geoposition (latitude/longitude), and corresponding admin/form widget.
 - [django-location-field](https://github.com/caioariede/django-location-field) - Location field and widget integrated with Google Maps.
-- [django-spillway](https://github.com/bkg/django-spillway) - Geodata extensions for Django REST Framework.
-- [djangorestframework-gis](https://github.com/djangonauts/django-rest-framework-gis) - Geographic add-ons for Django Rest Framework.
 
 
 ## Hit Count
@@ -616,11 +621,6 @@
 
 - [django-nap](https://github.com/funkybob/django-nap) - A minimalist approach to object serialization, RESTful views, and RPC views.
 - [django-rest-auth](https://github.com/tivix/django-rest-auth) - This app makes it extremely easy to build Django powered SPA's (Single Page App) or Mobile apps exposing all registration and authentication related functionality as CBV's (Class Base
-- [django-rest-localflavor](https://github.com/gilsondev/django-rest-localflavor) - Localized flavors of some serializers to use with Django Rest Framework.
-- [django-rest-swagger](https://github.com/marcgibbons/django-rest-swagger) - Swagger Documentation Generator for Django REST Framework.
-- [djangorestframework-recursive](https://github.com/heywbj/django-rest-framework-recursive) - Recursive Serialization for Django REST framework.
-- [drfdocs](https://github.com/manosim/django-rest-framework-docs) - Document Web APIs made with Django REST Framework.
-- [restless](https://github.com/toastdriven/restless) - A lightweight REST miniframework for Python.
 
 
 ## Search

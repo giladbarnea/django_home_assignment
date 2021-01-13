@@ -70,6 +70,9 @@ def parse_file(filename) -> dict:
         description = linedict['description']
         if current_title == 'Apis' and ('rest' in name.lower() or 'rest' in url or 'rest' in description.lower()):
             current_title = 'Django Rest Framework'
+        if 'django rest framework' in description.lower():
+            current_title = 'Django Rest Framework'
+            
         if name in filedict:
             if any(fileurl != url for fileurl in filedict[name]['urls']):
                 # same name, different url. e.g. name='official documentation', urls can be different because under different titles
